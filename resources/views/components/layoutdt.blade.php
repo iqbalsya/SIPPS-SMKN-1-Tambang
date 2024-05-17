@@ -46,10 +46,35 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    {{-- <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" /> --}}
 
+    <!-- Custom CSS for DataTables -->
+    <style>
+        .data-table {
+            border-radius: 0;
+            border: 5px solid #ff0000;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+
+        .data-table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .data-table thead th.sorting, .data-table thead th.sorting_asc, .data-table thead th.sorting_desc {
+            background-color: #f8f9fa;
+        }
+
+        .data-table_wrapper .pagination .page-item .page-link {
+            border-radius: 0 !important;
+        }
+    </style>
 
 </head>
 <body class="{{ $bodyClass }}">
