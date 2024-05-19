@@ -7,8 +7,8 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
-            <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">SIPPS SMKN 1 Tambang</span>
+            <img src="{{ asset('assets') }}/img/drake.jpg" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-2 font-weight-bold text-white">SIPPS<br>SMKN 1 Tambang</span>
         </a>
     </div>
 

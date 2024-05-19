@@ -13,13 +13,11 @@
                                 <i class="material-icons opacity-10">weekend</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                                <p class="text-sm mb-0 mt-3 text-capitalize">Today's Money</p>
                                 <h4 class="mb-0">$53k</h4>
                             </div>
                         </div>
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+                        <div class="card-footer p-1 mt-0">
                         </div>
                     </a>
                 </div>
