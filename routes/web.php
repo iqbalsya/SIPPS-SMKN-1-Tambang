@@ -24,7 +24,14 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
 
 
+Route::resource('siswa', SiswaController::class);
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
+
+Route::get('/siswa/edit/{id}', [SiswaController::class, 'edit'])->name('siswa.edit');
+Route::put('/siswa/update/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+
+Route::delete('/siswa/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 

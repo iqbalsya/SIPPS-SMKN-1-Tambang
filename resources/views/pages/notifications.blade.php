@@ -31,6 +31,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
                             <div class="alert alert-success alert-dismissible text-white" role="alert">
                                 <span class="text-sm">A simple success alert with <a href="javascript:;"
                                         class="alert-link text-white">an example link</a>. Give it a click if you
@@ -40,6 +41,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
                             <div class="alert alert-danger alert-dismissible text-white" role="alert">
                                 <span class="text-sm">A simple danger alert with <a href="javascript:;"
                                         class="alert-link text-white">an example link</a>. Give it a click if you
@@ -136,6 +138,7 @@
                         Hello, world! This is a notification message.
                     </div>
                 </div>
+
                 <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
                     aria-atomic="true">
                     <div class="toast-header bg-transparent border-0">

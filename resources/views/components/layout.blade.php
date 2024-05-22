@@ -51,6 +51,209 @@
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
 
+            <style>
+
+                /* CSS button close */
+                .btn-close {
+                    color: rgb(70, 70, 70);
+                    opacity: 1;
+                }
+                .btn-close:hover {
+                    color: rgb(150, 150, 150);
+                    opacity: 1;
+                }
+
+            /* css form modal */
+                .form-bordered .form-control {
+                    border: 1px solid #ced4da;
+                    border-radius: 0.25rem;
+                }
+                .form-bordered .form-group {
+                    margin-bottom: 1rem;
+                }
+                .form-group {
+                    margin-bottom: 1rem; /* Adjusts the space between form groups */
+                }
+                .form-group label {
+                    display: block;
+                    margin-bottom: 1rem; /* Adjusts the space between form groups */
+                    font-weight: bold;
+                }
+                .form-control {
+                    width: 100%;
+                    padding: 0.5rem 1rem; /* Adds padding to the input */
+                    border: 1px solid #ced4da; /* Default border */
+                    border-radius: 0.25rem; /* Rounded corners */
+                    box-sizing: border-box; /* Ensures padding is included in the width */
+                    transition: border-color 0.3s ease; /* Smooth transition for border color */
+                }
+                .form-control:focus {
+                    border-color: #4ba64f; /* Border color when input is focused */
+                    outline: none; /* Removes default outline */
+                    box-shadow: 0 0 0 0.1rem rgba(0, 172, 86, 0.25); /* Adds a shadow effect */
+                }
+                .form-control:not(:focus) {
+                    border-color: #ced4da; /* Reverts to default border color */
+                }
+                .form-group {
+                    padding-left: 1rem; /* Adds left padding to the form group */
+                }
+                .form-group label {
+                    display: block;
+                    margin-bottom: 0.5rem; /* Adds space between label and select */
+                    font-weight: bold;
+                }
+
+                .form-group label {
+                    display: block;
+                    margin-bottom: 0.5rem; /* Adds space between label and select */
+                    font-weight: bold;
+                }
+
+                /* Styling form-select */
+                .form-group .form-select {
+                    width: 100%;
+                    padding: 0.5rem 1rem; /* Adds padding to the select */
+                    padding-right: 2.5rem; /* Adds right padding to make space for custom arrow */
+                    border: 1px solid #ced4da; /* Default border */
+                    border-radius: 0.25rem; /* Rounded corners */
+                    box-sizing: border-box; /* Ensures padding is included in the width */
+                    transition: border-color 0.3s ease; /* Smooth transition for border color */
+                    background-color: #fff; /* White background */
+                    -webkit-appearance: none; /* Removes default styling in WebKit browsers */
+                    -moz-appearance: none; /* Removes default styling in Firefox */
+                    appearance: none; /* Removes default styling in modern browsers */
+                    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.5 5h11a.5.5 0 0 1 .351.859l-4.796 5.48a.5.5 0 0 1-.708 0z"/></svg>');
+                    background-repeat: no-repeat;
+                    background-position: right 1rem center;
+                    background-size: 1rem;
+                }
+
+                /* Styling form-select when focused */
+                .form-select:focus {
+                    border-color: #4ba64f; /* Border color when input is focused */
+                    outline: none; /* Removes default outline */
+                    box-shadow: 0 0 0 0.1rem rgba(0, 172, 86, 0.25); /* Adds a shadow effect */
+                }
+
+
+
+            /* css modal */
+                .modal-content {
+                    border-radius: 0.5rem;
+                    border: 1px solid #ced4da;
+                }
+                .modal-header {
+                    border-bottom: 1px solid #dee2e6;
+                }
+                .modal-footer {
+                    border-top: 1px solid #dee2e6;
+                }
+                .modal-header {
+                    width: 97.2%;
+                    display: block; /* atau display: flex; */
+                }
+
+
+            /* css table datatables */
+                .dataTables_wrapper .dataTables_sort_wrapper .sortable {
+                    vertical-align: middle !important;
+                }
+                .data-table tbody td {
+                    vertical-align: middle;
+                }
+                .data-table {
+                    border: 1px solid #d4d4d4;
+                }
+                .table.data-table {
+                    margin-bottom: 16px !important;
+                }
+                .data-table th, .data-table td {
+                    border: 1px solid gainsboro !important;
+                    border-right: 1px solid gainsboro;
+                }
+                .table.table-bordered.dataTable {
+                    border-right-width: 1px !important;
+                }
+                .data-table thead tr:last-child th {
+                    border-bottom: 2px solid gainsboro !important;
+                }
+
+
+            /* CSS pagination datatableas */
+                .dataTables_wrapper .dataTables_paginate .paginate_button {
+                    border-radius: 12% !important;
+                    border: 1px solid transparent;
+                }
+                .page-item.active .page-link {
+                    color: #fff;
+                    background-color: #4ba64f;
+                    border-color: rgb(189, 189, 189);
+                }
+                .page-item .page-item.active .page-link {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #7b809a;
+                    width: 72px;
+                    height: 36px;
+                    font-size: 0.875rem;
+                    border-radius: 12% !important;
+                    margin: 0;
+                }
+                .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                    border-radius: 12% !important;
+                    cursor: pointer;
+                }
+
+
+            /* CSS pencarian DataTables */
+                .dataTables_wrapper .dataTables_filter input {
+                    border-radius: 0.5rem;
+                    border: 1px solid #ddd;
+                    padding: 0.5rem;
+                    transition: border-color 0.3s ease; /
+                }
+                .dataTables_wrapper .dataTables_filter input:hover {
+                    border-color: #4ba64f; /* Warna border saat di-hover */
+                }
+                .dataTables_wrapper .dataTables_filter input:focus {
+                    border-color: #4ba64f; /* Warna border saat input fokus */
+                    outline: none; /* Menghilangkan outline default pada input fokus */
+                }
+
+
+            /* CSS datatables entri */
+                .dataTables_wrapper .dataTables_length select {
+                    width: 38px !important; /* Menyesuaikan lebar secara otomatis */
+                    padding: 0.25rem 0.20rem; /* Padding pada bagian atas dan bawah */
+                    font-size: 0.875rem; /* Ukuran font */
+                    line-height: 1.5; /* Ketinggian baris */
+                    border-radius: 4px; /* Membuat sudut border membulat */
+                    border: 1px solid #ced4da; /* Warna border */
+                    margin: 0 4px;
+                }
+                .dataTables_wrapper .dataTables_length select:focus {
+                    border-color: #4ba64f; /* Warna border saat fokus */
+                    outline: 0; /* Hilangkan outline */
+                    box-shadow: 0 0 0 0.1rem #4ba650a9(0, 255, 42, 0.336); /* Efek bayangan saat fokus */
+                }
+
+
+            /* CSS panah sort datatables */
+                table.dataTable>thead .sorting:before, table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_desc_disabled:before {
+                    right: 1em;
+                    content: "↑";
+                    bottom: 27%;
+                }
+                table.dataTable>thead .sorting:after, table.dataTable>thead .sorting_asc:after, table.dataTable>thead .sorting_desc:after, table.dataTable>thead .sorting_asc_disabled:after, table.dataTable>thead .sorting_desc_disabled:after {
+                    right: .5em;
+                    content: "↓";
+                    bottom: 27%;
+                }
+            </style>
+
+
 </head>
 <body class="{{ $bodyClass }}">
 
