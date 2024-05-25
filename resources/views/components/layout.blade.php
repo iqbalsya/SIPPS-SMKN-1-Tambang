@@ -52,6 +52,11 @@
 
 
             <style>
+                
+                .custom-hover-success:hover {
+                    color: #242424 !important; /* Warna teks */
+                    background-color: #f2fff2 !important; /* Warna latar belakang */
+                }
 
                 /* CSS button close */
                 .btn-close {
@@ -63,7 +68,7 @@
                     opacity: 1;
                 }
 
-            /* css form modal */
+            /* css form */
                 .form-bordered .form-control {
                     border: 1px solid #ced4da;
                     border-radius: 0.25rem;
@@ -103,37 +108,47 @@
                     margin-bottom: 0.5rem; /* Adds space between label and select */
                     font-weight: bold;
                 }
-
                 .form-group label {
                     display: block;
                     margin-bottom: 0.5rem; /* Adds space between label and select */
                     font-weight: bold;
                 }
-
-                /* Styling form-select */
                 .form-group .form-select {
                     width: 100%;
                     padding: 0.5rem 1rem; /* Adds padding to the select */
-                    padding-right: 2.5rem; /* Adds right padding to make space for custom arrow */
+                    padding-right: 2.5rem;
                     border: 1px solid #ced4da; /* Default border */
                     border-radius: 0.25rem; /* Rounded corners */
                     box-sizing: border-box; /* Ensures padding is included in the width */
-                    transition: border-color 0.3s ease; /* Smooth transition for border color */
+                    transition: border-color 0.3s ease;
                     background-color: #fff; /* White background */
                     -webkit-appearance: none; /* Removes default styling in WebKit browsers */
                     -moz-appearance: none; /* Removes default styling in Firefox */
                     appearance: none; /* Removes default styling in modern browsers */
-                    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.5 5h11a.5.5 0 0 1 .351.859l-4.796 5.48a.5.5 0 0 1-.708 0z"/></svg>');
                     background-repeat: no-repeat;
                     background-position: right 1rem center;
-                    background-size: 1rem;
                 }
-
                 /* Styling form-select when focused */
                 .form-select:focus {
                     border-color: #4ba64f; /* Border color when input is focused */
                     outline: none; /* Removes default outline */
                     box-shadow: 0 0 0 0.1rem rgba(0, 172, 86, 0.25); /* Adds a shadow effect */
+                }
+                /* Adjustments to handle validation icons */
+                .form-control.is-invalid {
+                    padding-right: 2.5rem; /* Adds padding to make space for validation icon */
+                    background-position: right 1rem center; /* Ensures background icon remains in place */
+                }
+                .form-select.is-invalid {
+                    padding-right: 3.5rem !important;
+                    background-position: right 1rem right !important;
+                }
+
+                .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"] {
+                    padding-right: 1rem;
+                    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e), url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23fd5c70' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23fd5c70' stroke='none'/%3e%3c/svg%3e);
+                    background-position: right 2.5rem center, center right 1rem !important;
+                    background-size: 16px 12px, 1rem 1rem;
                 }
 
 
@@ -251,6 +266,7 @@
                     content: "↓";
                     bottom: 27%;
                 }
+
             </style>
 
 

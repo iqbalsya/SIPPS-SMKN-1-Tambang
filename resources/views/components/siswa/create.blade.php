@@ -17,40 +17,116 @@
                             <form action="{{ route('siswa.store') }}" method="POST">
                                 @csrf
 
-                                <div class="form-group mb-3">
-                                    <label for="nis">NIS</label>
-                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}">
-                                    @error('nis')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="nama">Nama&nbsp;<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
+                                            @error('nama')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
-                                    @error('nama')
-                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                        <div class="form-group mb-3">
+                                            <label for="nis">NIS&nbsp;<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}">
+                                            @error('nis')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="kelas">Kelas</label>
-                                    <input type="text" class="form-control @error('kelas') is-invalid @enderror" id="kelas" name="kelas" value="{{ old('kelas') }}">
-                                    @error('kelas')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                        <div class="form-group mb-3">
+                                            <label for="nisn">NISN&nbsp;<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn" name="nisn" value="{{ old('nisn') }}">
+                                            @error('nisn')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender">
-                                        <option value="" selected disabled>Pilih Gender</option>
-                                        <option value="Laki laki" {{ old('gender') == 'Laki laki' ? 'selected' : '' }}>Laki laki</option>
-                                        <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                                    </select>
-                                    @error('gender')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                        <div class="form-group mb-3">
+                                            <label for="jurusan_id">Jurusan&nbsp;<span class="text-danger">*</span></label>
+                                            <select class="form-select @error('jurusan_id') is-invalid @enderror" id="jurusan_id" name="jurusan_id">
+                                                <option value="" selected disabled>Pilih Jurusan</option>
+                                                @foreach ($jurusan as $j)
+                                                    <option value="{{ $j->id }}" {{ old('jurusan_id') == $j->id ? 'selected' : '' }}>{{ $j->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('jurusan_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
+                                            <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id">
+                                                <option value="" selected disabled>Pilih Kelas</option>
+                                                @foreach ($kelas as $k)
+                                                    <option value="{{ $k->id }}" {{ old('kelas_id') == $k->id ? 'selected' : '' }}>{{ $k->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('kelas_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="gender_id">Gender&nbsp;<span class="text-danger">*</span></label>
+                                            <select class="form-select @error('gender_id') is-invalid @enderror" id="gender_id" name="gender_id">
+                                                <option value="" selected disabled>Pilih Gender</option>
+                                                @foreach ($gender as $g)
+                                                    <option value="{{ $g->id }}" {{ old('gender_id') == $g->id ? 'selected' : '' }}>{{ $g->jenis }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('gender_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="agama_id">Agama&nbsp;<span class="text-danger">*</span></label>
+                                            <select class="form-select @error('agama_id') is-invalid @enderror" id="agama_id" name="agama_id">
+                                                <option value="" selected disabled>Pilih Agama</option>
+                                                @foreach ($agama as $a)
+                                                    <option value="{{ $a->id }}" {{ old('agama_id') == $a->id ? 'selected' : '' }}>{{ $a->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('agama_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="tempat_lahir">Tempat Lahir</label>
+                                            <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nama_ayah">Nama Ayah</label>
+                                            <input type="text" class="form-control" id="nama_ayah" name="nama_ayah" value="{{ old('nama_ayah') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nama_ibu">Nama Ibu</label>
+                                            <input type="text" class="form-control" id="nama_ibu" name="nama_ibu" value="{{ old('nama_ibu') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="telepon">Telepon</label>
+                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="alamat">Alamat</label>
+                                            <textarea class="form-control" id="alamat" name="alamat">{{ old('alamat') }}</textarea>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="d-flex justify-content-end">
@@ -63,17 +139,5 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    let alert = document.querySelector('.alert');
-                    if (alert) {
-                        alert.style.transition = 'opacity 0.5s';
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500);
-                    }
-                }, 3000); // 3 seconds
-            });
-        </script>
     </main>
 </x-layout>

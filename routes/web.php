@@ -17,21 +17,42 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
 
 
-Route::resource('siswa', SiswaController::class);
-Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
-Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
+Route::resource('guru', GuruController::class);
 
-Route::get('/siswa/edit/{id}', [SiswaController::class, 'edit'])->name('siswa.edit');
-Route::put('/siswa/update/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+Route::resource('jurusan', JurusanController::class);
 
-Route::delete('/siswa/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+    Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('/siswa/{siswa}', [SiswaController::class, 'show'])->name('siswa.show');
+    Route::get('/siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::put('/siswa/{siswa}', [SiswaController::class, 'update'])->name('siswa.update');
+    Route::delete('/siswa/{siswa}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/kelas/{kelas}', [KelasController::class, 'show'])->name('kelas.show');
+    Route::get('/kelas/{kelas}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/kelas/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/kelas/{kelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+});
+
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 
