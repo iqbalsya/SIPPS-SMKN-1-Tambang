@@ -23,7 +23,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Daftar Siswa</h6>
+                                <h5 class="text-white text-capitalize ps-3">Daftar Siswa SMKN 1 Tambang</h5>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
@@ -32,27 +32,27 @@
                                     <i class="material-icons text-sm">add</i>&nbsp;Tambah Siswa
                                 </a>
                             </div>
-                            <table class="table table-striped table-bordered data-table text-center mb-3">
+                            <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th width="16px">No</th>
-                                        <th width="64px">NIS</th>
-                                        <th>Nama</th>
-                                        <th width="84px">Kelas</th>
-                                        <th width="96px">Gender</th>
-                                        <th width="104px">Action</th>
+                                        <th class="text-center" width="16px">No</th>
+                                        <th class="text-center" width="64px">NIS</th>
+                                        <th class="text-center" >Nama</th>
+                                        <th class="text-center" width="84px">Kelas</th>
+                                        <th class="text-center" width="96px">Gender</th>
+                                        <th class="text-center" width="104px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($siswa as $s)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $s->nis }}</td>
-                                        <td>{{ $s->nama }}</td>
-                                        <td>{{ $s->kelas->nama }}</td>
-                                        <td>{{ $s->gender->jenis }}</td>
-                                        <td>
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center">{{ $s->nis }}</td>
+                                        <td class="ps-4">{{ $s->nama }}</td>
+                                        <td class="text-center">{{ $s->kelas->nama }}</td>
+                                        <td class="text-center">{{ $s->gender->jenis }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('siswa.profil', $s->id)}}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
                                             <a href="{{ route('siswa.edit', $s->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

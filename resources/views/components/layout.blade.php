@@ -52,11 +52,10 @@
 
 
             <style>
-                
-                .custom-hover-success:hover {
-                    color: #242424 !important; /* Warna teks */
-                    background-color: #f2fff2 !important; /* Warna latar belakang */
-                }
+                /* .nav-link.active {
+                    background-color: #4ba64f !important; /* Warna latar belakang saat aktif */
+                    /* color: #ffffff !important; /* Warna teks saat aktif */
+                /* } */
 
                 /* CSS button close */
                 .btn-close {
@@ -196,30 +195,33 @@
 
 
             /* CSS pagination datatableas */
-                .dataTables_wrapper .dataTables_paginate .paginate_button {
-                    border-radius: 12% !important;
+                .dataTables_paginate .paginate_button {
                     border: 1px solid transparent;
                 }
+
                 .page-item.active .page-link {
+                    border-radius: 28% !important;
                     color: #fff;
                     background-color: #4ba64f;
                     border-color: rgb(189, 189, 189);
+                    margin: 0;
                 }
-                .page-item .page-item.active .page-link {
+
+                .page-item .page-link {
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     color: #7b809a;
-                    width: 72px;
-                    height: 36px;
-                    font-size: 0.875rem;
-                    border-radius: 12% !important;
+                    font-size: 1rem;
+                    border-radius: 28% !important;
                     margin: 0;
                 }
-                .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                    border-radius: 12% !important;
-                    cursor: pointer;
+
+                .page-item .page-link:active,
+                .page-item .page-link:focus {
+                    outline: 3px solid rgba(147, 255, 153, 0.5) !important; /* Warna outline saat ditekan */
                 }
+
 
 
             /* CSS pencarian DataTables */

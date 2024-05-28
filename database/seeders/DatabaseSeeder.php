@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TipePelanggaran;
 use Illuminate\Database\Seeder;
 
 
@@ -28,6 +29,8 @@ class DatabaseSeeder extends Seeder
             JurusansTableSeeder::class,
             KelassTableSeeder::class,
             SiswasTableSeeder::class,
+            TipePelanggaransTableSeeder::class,
+            PelanggaransTableSeeder::class,
         ]);
     }
 }

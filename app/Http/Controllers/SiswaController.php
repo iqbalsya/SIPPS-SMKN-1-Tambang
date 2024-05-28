@@ -17,6 +17,17 @@ class SiswaController extends Controller
         return view('components.siswa.index', compact('siswa'));
     }
 
+
+    public function show($id)
+    {
+        $siswa = Siswa::with('kelas', 'jurusan', 'bukuPelanggarans')->findOrFail($id);
+        $totalPelanggaran = $siswa->bukuPelanggarans->count();
+        $totalPoin = $siswa->bukuPelanggarans->sum('pivot.poin');
+
+        return view('components.siswa.siswa', compact('siswa', 'totalPelanggaran', 'totalPoin'));
+    }
+
+
     public function create()
     {
         $kelas = Kelas::all();

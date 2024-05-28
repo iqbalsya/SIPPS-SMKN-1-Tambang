@@ -52,7 +52,7 @@
                                                     <option value="{{ $j->id }}" {{ old('jurusan_id', $siswa->jurusan_id) == $j->id ? 'selected' : '' }}>{{ $j->nama }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('jurusan_id')
+                                            @error('_id')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
