@@ -23,7 +23,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-danger shadow-danger border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Daftar Pelanggaran</h6>
+                                <h4 class="text-white text-capitalize ps-3">Daftar Pelanggaran</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
@@ -31,32 +31,6 @@
                             <div class="d-flex justify-content-between">
 
                                 <x-navbars.navs.pelanggaran activePage="pelanggaran"></x-navbars.navs.pelanggaran>
-
-                                {{-- <div class="nav-wrapper position-relative my-4">
-                                    <ul class="nav nav-pills nav-fill" role="tablist">
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1 active" href="{{ route('pelanggaran.index') }}"
-                                                role="tab" aria-selected="true">
-                                                <i class="material-icons text-lg position-relative">home</i>
-                                                <span class="ms-1">List Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1" href="{{ route('tipe-pelanggaran.index') }}"
-                                                role="tab" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">email</i>
-                                                <span class="ms-1">Tipe Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1" href="{{ route('sanksi-pelanggaran.index') }}"
-                                                role="tab" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">settings</i>
-                                                <span class="ms-1">Sanksi Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> --}}
 
                                 <div class="my-3">
                                     <a class="btn bg-gradient-danger mb-0" href="{{ route('pelanggaran.create') }}">
@@ -83,7 +57,7 @@
                                         <td class="text-center">{{ $p->tipePelanggaran->nama }}</td>
                                         <td class="text-center">{{ $p->poin }}</td>
                                         <td class="text-center">
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('pelanggaran.show', $p->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
                                             <a href="{{ route('pelanggaran.edit', $p->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

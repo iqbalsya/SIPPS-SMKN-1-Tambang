@@ -22,6 +22,12 @@ class KelasController extends Controller
         return view('components.kelas.create', compact('gurus', 'jurusans'));
     }
 
+    public function show($id)
+    {
+        $kelas = Kelas::with(['siswa.bukuPelanggarans', 'siswa.gender'])->findOrFail($id);
+        return view('components.kelas.kelas', compact('kelas'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -57,7 +63,7 @@ class KelasController extends Controller
             'guru_id.exists' => 'Guru yang dipilih tidak valid.',
             'jurusan_id.exists' => 'Jurusan yang dipilih tidak valid.',
         ]);
-        
+
         $kelas->update($validated);
 
         return redirect()->route('kelas.index')->with('success', 'Kelas telah diperbarui');

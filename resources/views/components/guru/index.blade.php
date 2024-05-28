@@ -23,7 +23,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Daftar Guru</h6>
+                                <h4 class="text-white text-capitalize ps-3">Daftar Guru</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
@@ -50,7 +50,7 @@
                                         <td>{{ $g->posisi }}</td>
                                         <td>{{ $g->gender->jenis }}</td>
                                         <td>
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('guru.show', $g->id)}}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
                                             <a href="{{ route('guru.edit', $g->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

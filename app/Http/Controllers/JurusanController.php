@@ -24,6 +24,12 @@ class JurusanController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $jurusan = Jurusan::findOrFail($id);
+        return view('components.jurusan.jurusan', compact('jurusan'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([

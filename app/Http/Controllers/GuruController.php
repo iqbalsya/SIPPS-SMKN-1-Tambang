@@ -23,6 +23,15 @@ class GuruController extends Controller
         return view('components.guru.create', compact('guru', 'genders', 'agamas'));
     }
 
+        public function show($id)
+    {
+        $guru = Guru::findOrFail($id);
+        $totalPelanggaran = $guru->bukuPelanggarans()->count();
+        $totalPoin = $guru->bukuPelanggarans()->sum('poin');
+
+        return view('components.guru.guru', compact('guru', 'totalPelanggaran', 'totalPoin'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

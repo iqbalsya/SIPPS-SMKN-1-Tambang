@@ -83,7 +83,6 @@
                                         <td class="ps-4">{{ $s->nama }}</td>
                                         <td class="text-center">{{ $s->akumulasi_poin }} Poin</td>
                                         <td class="text-center">
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
                                             <a href="{{ route('sanksi-pelanggaran.edit', $s->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

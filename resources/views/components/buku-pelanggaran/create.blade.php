@@ -2,7 +2,7 @@
     <x-navbars.sidebar activePage="buku-pelanggaran"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Edit Buku Pelanggaran"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Tambah Pelanggaran"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid">
             <div class="row">
@@ -19,28 +19,50 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
-                                            <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" onchange="fetchSiswa(this.value)">
-                                                <option value="" selected disabled>Pilih Kelas</option>
-                                                @foreach ($kelas as $kelas)
-                                                    <option value="{{ $kelas->id }}">{{ $kelas->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('kelas_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                        @if ($siswa)
+                                            <div class="form-group mb-3">
+                                                <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" readonly>
+                                                    <option value="{{ $siswa->kelas->id }}">{{ $siswa->kelas->nama }}</option>
+                                                </select>
+                                                @error('kelas_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
 
-                                        <div class="form-group mb-3">
-                                            <label for="siswa_id">Siswa&nbsp;<span class="text-danger">*</span></label>
-                                            <select class="form-select @error('siswa_id') is-invalid @enderror" id="siswa_id" name="siswa_id">
-                                                <option value="" selected disabled>Pilih Siswa</option>
-                                            </select>
-                                            @error('siswa_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                            <div class="form-group mb-3">
+                                                <label for="siswa_id">Siswa&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('siswa_id') is-invalid @enderror" id="siswa_id" name="siswa_id" readonly>
+                                                    <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
+                                                </select>
+                                                @error('siswa_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" onchange="fetchSiswa(this.value)">
+                                                    <option value="" selected disabled>Pilih Kelas</option>
+                                                    @foreach ($kelas as $kelas)
+                                                        <option value="{{ $kelas->id }}">{{ $kelas->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('kelas_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="siswa_id">Siswa&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('siswa_id') is-invalid @enderror" id="siswa_id" name="siswa_id">
+                                                    <option value="" selected disabled>Pilih Siswa</option>
+                                                </select>
+                                                @error('siswa_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="col-md-6">

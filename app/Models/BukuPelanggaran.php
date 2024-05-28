@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Carbon\Carbon;
 
 class BukuPelanggaran extends Pivot
 {
@@ -36,5 +38,10 @@ class BukuPelanggaran extends Pivot
     public function guru()
     {
         return $this->belongsTo(Guru::class, 'guru_id');
+    }
+
+     public function getFormattedTanggalAttribute()
+    {
+        return Carbon::parse($this->hari_tanggal)->locale('id')->translatedFormat('l, d F Y');
     }
 }

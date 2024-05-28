@@ -9,7 +9,6 @@ use App\Models\TipePelanggaran;
 use App\Models\Pelanggaran;
 use App\Models\Guru;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BukuPelanggaranController extends Controller
 {
@@ -19,27 +18,30 @@ class BukuPelanggaranController extends Controller
         return view('components.buku-pelanggaran.index', compact('bukuPelanggarans'));
     }
 
-    public function create()
+    public function create(Request $request, $siswa_id = null)
     {
-        $kelas = Kelas::all();
+        $siswa = null;
+        if ($siswa_id) {
+            $siswa = Siswa::with('kelas')->findOrFail($siswa_id);
+        }
         $tipePelanggaran = TipePelanggaran::all();
         $gurus = Guru::all();
+        $kelas = Kelas::all();
 
-        return view('components.buku-pelanggaran.create', compact('kelas', 'tipePelanggaran', 'gurus'));
+        return view('components.buku-pelanggaran.create', compact('siswa', 'tipePelanggaran', 'gurus', 'kelas'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'siswa_id' => 'required',
-            'kelas_id' => 'required', // ubah siswa_id menjadi kelas_id karena sudah diperbarui pada form
+            'kelas_id' => 'required',
             'tipe_pelanggaran_id' => 'required',
             'pelanggaran_id' => 'required',
             'guru_id' => 'required',
             'hari_tanggal' => 'required',
         ]);
 
-        // Retrieve poin from the selected pelanggaran
         $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
         $poin = $pelanggaran->poin;
 
@@ -72,14 +74,13 @@ class BukuPelanggaranController extends Controller
     {
         $request->validate([
             'siswa_id' => 'required',
-            'kelas_id' => 'required', // ubah siswa_id menjadi kelas_id karena sudah diperbarui pada form
+            'kelas_id' => 'required',
             'tipe_pelanggaran_id' => 'required',
             'pelanggaran_id' => 'required',
             'guru_id' => 'required',
             'hari_tanggal' => 'required',
         ]);
 
-        // Retrieve poin from the selected pelanggaran
         $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
         $poin = $pelanggaran->poin;
 

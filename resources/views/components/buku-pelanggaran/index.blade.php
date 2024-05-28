@@ -25,13 +25,13 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Daftar Buku Pelanggaran</h6>
+                                <h4 class="text-white text-capitalize ps-3">Buku Pelanggaran Siswa</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
                             <div class="my-3 text-end">
                                 <a class="btn bg-gradient-success mb-0" href="{{ route('buku-pelanggaran.create') }}">
-                                    <i class="material-icons text-sm">add</i>&nbsp;Tambah Buku Pelanggaran
+                                    <i class="material-icons text-xl">add</i>&nbsp;Catat Pelanggaran
                                 </a>
                             </div>
                             <table class="table table-striped table-bordered data-table mb-3">
@@ -39,12 +39,12 @@
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center">Siswa</th>
-                                        <th class="text-center">Tipe Pelanggaran</th>
+                                        {{-- <th class="text-center">Tipe Pelanggaran</th> --}}
                                         <th class="text-center">Pelanggaran</th>
-                                        <th class="text-center">Guru</th>
-                                        <th class="text-center">Poin</th>
-                                        <th class="text-center">Hari & Tanggal</th>
-                                        <th class="text-center" width="100px">Action</th>
+                                        <th class="text-center" width="150px">Guru Pelapor</th>
+                                        <th class="text-center" width="10px">Poin</th>
+                                        <th class="text-center" width="10px">Hari & Tanggal</th>
+                                        <th class="text-center" width="10px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,18 +52,21 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $bukuPelanggaran->siswa->nama }}</td>
-                                        <td>{{ $bukuPelanggaran->tipePelanggaran->nama }}</td>
+                                        {{-- <td>{{ $bukuPelanggaran->tipePelanggaran->nama }}</td> --}}
                                         <td>{{ $bukuPelanggaran->pelanggaran->deskripsi }}</td>
                                         <td>{{ $bukuPelanggaran->guru->nama }}</td>
                                         <td class="text-center">{{ $bukuPelanggaran->poin }}</td>
-                                        <td class="text-center">{{ $bukuPelanggaran->hari_tanggal }}</td>
+                                        <td class="text-center">{{ $bukuPelanggaran->formatted_tanggal }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('buku-pelanggaran.edit', $bukuPelanggaran->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
-
+                                            <a href="{{ route('buku-pelanggaran.edit', $bukuPelanggaran->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2">
+                                                <i class="material-icons">edit</i>
+                                            </a>
                                             <form action="{{ route('buku-pelanggaran.destroy', $bukuPelanggaran->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
+                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -81,7 +84,7 @@
                         language: {
                             search: "Cari:",
                             lengthMenu: "Tampilkan _MENU_ data buku pelanggaran",
-                            info: "Menampilkan _START_ - _END_ dari _TOTAL_ buku pelanggaran",
+                            info: "Menampilkan _START_ - _END_ dari _TOTAL_ pelanggaran",
                             paginate: {
                                 previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
                                 next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'

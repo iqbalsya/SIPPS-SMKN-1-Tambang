@@ -17,70 +17,12 @@
                 </div>
             @endif
 
-            {{-- <div class="row mt-4 mb-4">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <a href="{{ route('kelas.filter', 'OTKP') }}" class="card text-decoration-none custom-hover-success border-radius-xl px-3 pb-3">
-                        <div>
-                            <button class="btn btn-icon btn-2 btn-success icon icon-lg icon-shape bg-gradient-success text-center border-radius-xl mt-n4 position-absolute" type="button">
-                                <span class="btn-inner--icon"><i class="material-icons opacity-10">lightbulb</i></span>
-                            </button>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-md mb-0 mt-3 text-capitalize"><strong>OTK Perkantoran</strong></p>
-                            <h4 class="mb-0">jumlah siswa</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <a href="{{ route('kelas.filter', 'TP') }}" class="card text-decoration-none custom-hover-success border-radius-xl px-3 pb-3">
-                        <div>
-                            <button class="btn btn-icon btn-2 btn-success icon icon-lg icon-shape bg-gradient-success text-center border-radius-xl mt-n4 position-absolute" type="button">
-                                <span class="btn-inner--icon"><i class="material-icons opacity-10">lightbulb</i></span>
-                            </button>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-md mb-0 mt-3 text-capitalize"><strong>Teknik Permesinan</strong></p>
-                            <h4 class="mb-0">jumlah siswa</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <a href="{{ route('kelas.filter', 'TKR') }}" class="card text-decoration-none custom-hover-success border-radius-xl px-3 pb-3">
-                        <div>
-                            <button class="btn btn-icon btn-2 btn-success icon icon-lg icon-shape bg-gradient-success text-center border-radius-xl mt-n4 position-absolute" type="button">
-                                <span class="btn-inner--icon"><i class="material-icons opacity-10">lightbulb</i></span>
-                            </button>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-md mb-0 mt-3 text-capitalize"><strong>Teknik Kendaraan Ringan</strong></p>
-                            <h4 class="mb-0">jumlah siswa</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <a href="{{ route('kelas.filter', 'TBSM') }}" class="card text-decoration-none custom-hover-success border-radius-xl px-3 pb-3">
-                        <div>
-                            <button class="btn btn-icon btn-2 btn-success icon icon-lg icon-shape bg-gradient-success text-center border-radius-xl mt-n4 position-absolute" type="button">
-                                <span class="btn-inner--icon"><i class="material-icons opacity-10">lightbulb</i></span>
-                            </button>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-md mb-0 mt-3 text-capitalize"><strong>Teknik Bisnis & Sepeda Motor</strong></p>
-                            <h4 class="mb-0">jumlah siswa</h4>
-                        </div>
-                    </a>
-                </div>
-            </div> --}}
-
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Daftar Kelas</h6>
+                                <h4 class="text-white text-capitalize ps-3">Daftar Kelas</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
@@ -107,7 +49,7 @@
                                         <td>{{ $k->guru->nama }}</td>
                                         <td>{{ $k->jumlah_siswa }}</td>
                                         <td>
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('kelas.show', $k->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
                                             <a href="{{ route('kelas.edit', $k->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

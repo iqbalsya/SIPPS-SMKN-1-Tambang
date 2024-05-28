@@ -47,8 +47,10 @@
                                         <td>{{ $jurusan->guru->nama }}</td>
                                         <td>{{ $jurusan->jumlah_siswa }}</td>
                                         <td>
-                                            <a href="" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('jurusan.show', $jurusan->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
+
                                             <a href="{{ route('jurusan.edit', $jurusan->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+
                                             <form action="{{ route('jurusan.destroy', $jurusan->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jurusan ini?');">
                                                 @csrf
                                                 @method('DELETE')

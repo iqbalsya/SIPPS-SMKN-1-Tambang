@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
+
     public function index()
     {
-        $siswa = Siswa::with('kelas', 'jurusan', 'gender', 'agama')->get();
+        $siswa = Siswa::with('kelas', 'jurusan', 'gender', 'agama', 'bukuPelanggarans')->get();
         return view('components.siswa.index', compact('siswa'));
     }
 

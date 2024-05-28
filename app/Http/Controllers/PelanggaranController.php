@@ -14,6 +14,12 @@ class PelanggaranController extends Controller
         return view('components.pelanggaran.index', compact('pelanggaran'));
     }
 
+    public function show($pelanggaran_id)
+    {
+        $pelanggaran = Pelanggaran::with('bukuPelanggarans')->findOrFail($pelanggaran_id);
+        return view('components.pelanggaran.pelanggaran', compact('pelanggaran'));
+    }
+
     public function create()
     {
         $tipePelanggaran = TipePelanggaran::all();

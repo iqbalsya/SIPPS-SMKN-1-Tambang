@@ -36,7 +36,7 @@ class Siswa extends Model
     public function bukuPelanggarans()
     {
         return $this->belongsToMany(Pelanggaran::class, 'buku_pelanggarans')
-            ->using(BukuPelanggaran::class)  // Ensure to use the correct Pivot model
+            ->using(BukuPelanggaran::class)
             ->withPivot(['poin', 'hari_tanggal', 'tipe_pelanggaran_id', 'guru_id'])
             ->withTimestamps();
     }
@@ -45,4 +45,10 @@ class Siswa extends Model
     {
         return $query->where('kelas_id', $kelas_id);
     }
+
+    public function getTotalPoinAttribute()
+    {
+        return $this->bukuPelanggarans()->sum('buku_pelanggarans.poin');
+    }
+
 }

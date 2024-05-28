@@ -47,6 +47,8 @@ Route::get('/get-pelanggaran/{tipePelanggaranId}', [BukuPelanggaranController::c
 
 Route::resource('buku-pelanggaran', BukuPelanggaranController::class);
 
+Route::get('/buku-pelanggaran/create/{siswa_id?}', [BukuPelanggaranController::class, 'create'])->name('buku-pelanggaran.create');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
     Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
@@ -55,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::put('/siswa/{siswa}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{siswa}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
-    Route::get('/siswa/{id}/profil', [SiswaController::class, 'show'])->name('siswa.profil');
 
 });
 
