@@ -15,7 +15,7 @@
     <hr class="horizontal light mt-0 mb-2">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'user-profile' ? 'active bg-gradient-info' : '' }}" href="{{ route('user-profile') }}">
+                <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'user-profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user-profile') }}">
                     <i class="fas fa-user-circle" style="font-size: 1.2rem; margin-right: 8px;"></i>
                     <span class="nav-link-text">User Profile</span>
                 </a>
@@ -35,7 +35,7 @@
                 <hr class="flex-grow-1 border-white opacity-8 ms-3 me-3 mt-2 mb-2">
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-info' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10 pb-1">dashboard</i>

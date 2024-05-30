@@ -18,6 +18,7 @@ class BukuPelanggaran extends Pivot
         'guru_id',
         'poin',
         'hari_tanggal',
+        'alasan',
     ];
 
     public function siswa()

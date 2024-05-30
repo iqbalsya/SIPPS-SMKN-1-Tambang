@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label for="guru_id">Guru&nbsp;<span class="text-danger">*</span></label>
+                                            <label for="guru_id">Guru Piket&nbsp;<span class="text-danger">*</span></label>
                                             <select class="form-select @error('guru_id') is-invalid @enderror" id="guru_id" name="guru_id">
                                                 <option value="" selected disabled>Pilih Guru</option>
                                                 @foreach ($gurus as $guru)
@@ -94,6 +94,15 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                    <div class="form-group mb-3">
+                                        <label for="deskripsi">Alasan Keterlambatan&nbsp;<span class="text-danger">*</span></label>
+                                        <textarea class="form-control @error('alasan') is-invalid @enderror" id="alasan" name="alasan">{{ old('alasan') }}</textarea>
+                                        @error('alsan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
                                 <div class="d-flex justify-content-end">
                                     <a href="{{ route('lapor-keterlambatan.index') }}" class="btn btn-secondary mb-0 mt-3 me-2">Batal</a>

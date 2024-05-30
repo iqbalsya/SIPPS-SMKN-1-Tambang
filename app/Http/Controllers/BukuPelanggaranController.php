@@ -49,6 +49,7 @@ class BukuPelanggaranController extends Controller
             'pelanggaran_id' => 'required',
             'guru_id' => 'required',
             'hari_tanggal' => 'required',
+            'alasan' => 'nullable|string|max:255',
         ]);
 
         $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
@@ -62,6 +63,7 @@ class BukuPelanggaranController extends Controller
             'guru_id' => $request->guru_id,
             'poin' => $poin,
             'hari_tanggal' => $request->hari_tanggal,
+            'alasan' => $request->alasan,
         ]);
 
         return redirect()->route('buku-pelanggaran.index')->with('success', 'Buku pelanggaran berhasil ditambah.');

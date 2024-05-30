@@ -8,9 +8,7 @@
             @if(session('success'))
                 <div class="alert alert-light alert-dismissible text-dark fade show" role="alert">
                     <span class="alert-icon align-middle">
-                        <span class="material-icons text-md">
-                            thumb_up
-                        </span>
+                        <span class="material-icons text-md">thumb_up</span>
                     </span>
                     <strong>&nbsp;Berhasil&nbsp;-&nbsp;</strong>{{ session('success') }}
                     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -22,12 +20,12 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-info shadow-info border-radius-lg pt-3 pb-3">
-                                <h4 class="text-white text-capitalize ps-3">Lapor Keterlambatan Siswa</h4>
-                                <p class="text-white ps-3 fw-normal mt-n2 mb-1">Tambah keterlambatan dan cetak surat</p>
+                                <h4 class="text-white text-capitalize ps-3">Data Keterlambatan Siswa</h4>
+                                <p class="text-white ps-3 fw-normal mt-n2 mb-1">Lapor keterlambatan dan cetak surat izin masuk kelas</p>
                             </div>
                         </div>
                         <div class="container pt-2 mb-3">
-                            <div class=" my-3 text-end">
+                            <div class="my-3 text-end">
                                 <a class="btn bg-gradient-info mb-0" href="{{ route('lapor-keterlambatan.create') }}">
                                     <i class="material-icons text-xl">add</i>&nbsp;Lapor Keterlambatan
                                 </a>
@@ -41,23 +39,25 @@
                                         <th class="text-center" width="70px">Kelas</th>
                                         <th class="text-center" width="100px">Jenis Kelamin</th>
                                         <th class="text-center" width="240px">Guru Piket</th>
+                                        <th class="text-center" width="10px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($pelanggaranTerlambat as $index => $bukuPelanggaran)
                                     <tr>
                                         <td class="text-center">{{ $index + 1 }}</td>
-                                        <td class="ps-2">
-                                            {{ $bukuPelanggaran->formatted_tanggal ?? 'Tidak ada tanggal' }}
-                                        </td>
+                                        <td class="ps-2">{{ $bukuPelanggaran->formatted_tanggal ?? 'Tidak ada tanggal' }}</td>
                                         <td class="ps-3">{{ $bukuPelanggaran->siswa->nama ?? 'Tidak ada nama' }}</td>
                                         <td class="text-center">{{ $bukuPelanggaran->siswa->kelas->nama ?? 'Tidak ada kelas' }}</td>
                                         <td class="text-center">{{ $bukuPelanggaran->siswa->gender->jenis ?? 'Tidak ada gender' }}</td>
                                         <td class="ps-3">{{ $bukuPelanggaran->guru->nama ?? 'Tidak ada guru' }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('lapor-keterlambatan.cetak', $bukuPelanggaran->id) }}" class="edit btn btn-info btn-link btn-md m-0 py-2"><i class="material-icons">description</i></a>
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="6" class="text-center">Tidak ada data pelanggaran terlambat datang ke sekolah.</td>
+                                        <td colspan="7" class="text-center">Tidak ada data pelanggaran terlambat datang ke sekolah.</td>
                                     </tr>
                                     @endforelse
                                 </tbody>

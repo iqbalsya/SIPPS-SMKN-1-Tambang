@@ -22,6 +22,7 @@ class CreateBukuPelanggaransTable extends Migration
             $table->foreignId('guru_id')->constrained('gurus');
             $table->integer('poin');
             $table->date('hari_tanggal');
+            $table->string('alasan');
             $table->timestamps();
 
             $table->unique(['siswa_id', 'kelas_id', 'tipe_pelanggaran_id', 'pelanggaran_id', 'guru_id', 'hari_tanggal'], 'buku_pelanggaran_unique');

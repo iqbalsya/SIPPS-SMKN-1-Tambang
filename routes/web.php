@@ -21,16 +21,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelanggaranController;
-use App\Http\Controllers\LaporKeterlambatanController;
 use App\Http\Controllers\BukuPelanggaranController;
 use App\Http\Controllers\TipePelanggaranController;
 use App\Http\Controllers\SanksiPelanggaranController;
+use App\Http\Controllers\LaporKeterlambatanController;
 
 Route::resource('guru', GuruController::class);
 
@@ -57,6 +58,8 @@ Route::get('lapor-keterlambatan/create', [LaporKeterlambatanController::class, '
 
 Route::post('lapor-keterlambatan', [LaporKeterlambatanController::class, 'store'])->name('lapor-keterlambatan.store');
 
+Route::get('lapor-keterlambatan/create/{id}', [LaporKeterlambatanController::class, 'cetakSurat'])->name('lapor-keterlambatan.cetak');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
     Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
@@ -78,10 +81,16 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/kelas/{kelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 });
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+Route::get('/api/pelanggaran-bulanan', [DashboardController::class, 'getPelanggaranBulanan'])->middleware('auth');
+
+Route::get('/api/pelanggaran-terlambat', [DashboardController::class, 'getPelanggaranTerlambat'])->middleware('auth');
+
+Route::get('/api/pelanggaran-alpa', [DashboardController::class, 'getPelanggaranAlpa'])->middleware('auth');
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 
