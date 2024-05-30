@@ -27,6 +27,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\LaporKeterlambatanController;
 use App\Http\Controllers\BukuPelanggaranController;
 use App\Http\Controllers\TipePelanggaranController;
 use App\Http\Controllers\SanksiPelanggaranController;
@@ -48,6 +49,13 @@ Route::get('/get-pelanggaran/{tipePelanggaranId}', [BukuPelanggaranController::c
 Route::resource('buku-pelanggaran', BukuPelanggaranController::class);
 
 Route::get('/buku-pelanggaran/create/{siswa_id?}', [BukuPelanggaranController::class, 'create'])->name('buku-pelanggaran.create');
+
+
+Route::get('/lapor-keterlambatan', [LaporKeterlambatanController::class, 'index'])->name('lapor-keterlambatan.index');
+
+Route::get('lapor-keterlambatan/create', [LaporKeterlambatanController::class, 'create'])->name('lapor-keterlambatan.create');
+
+Route::post('lapor-keterlambatan', [LaporKeterlambatanController::class, 'store'])->name('lapor-keterlambatan.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');

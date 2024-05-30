@@ -14,8 +14,17 @@ class BukuPelanggaranController extends Controller
 {
     public function index()
     {
-        $bukuPelanggarans = BukuPelanggaran::with(['siswa', 'tipePelanggaran', 'pelanggaran', 'guru'])->get();
+        $bukuPelanggarans = BukuPelanggaran::with(['siswa', 'tipePelanggaran', 'pelanggaran', 'guru'])
+        ->orderBy('hari_tanggal', 'desc')
+        ->get();
         return view('components.buku-pelanggaran.index', compact('bukuPelanggarans'));
+    }
+
+    public function show($id)
+    {
+        $pelanggaran = Pelanggaran::with(['bukuPelanggarans.siswa.kelas', 'bukuPelanggarans.siswa.gender', 'bukuPelanggarans.guru', 'tipePelanggaran'])->findOrFail($id);
+
+        return view('keterlambatan.index', compact('pelanggaran'));
     }
 
     public function create(Request $request, $siswa_id = null)

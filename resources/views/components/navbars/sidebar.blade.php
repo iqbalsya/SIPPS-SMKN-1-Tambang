@@ -124,6 +124,16 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'lapor-keterlambatan' ? ' active bg-gradient-success' : '' }} "
+                    href="{{ route('lapor-keterlambatan.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10 pb-1">groups</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Lapor Keterlambatan</span>
+                </a>
+            </li>
+
             {{-- <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'billing' ? ' active bg-gradient-success' : '' }}  "
                     href="{{ route('billing') }}">

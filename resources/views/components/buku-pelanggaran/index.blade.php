@@ -41,9 +41,9 @@
                                         <th class="text-center">Siswa</th>
                                         {{-- <th class="text-center">Tipe Pelanggaran</th> --}}
                                         <th class="text-center">Pelanggaran</th>
-                                        <th class="text-center" width="150px">Guru Pelapor</th>
+                                        {{-- <th class="text-center" width="150px">Guru Pelapor</th> --}}
                                         <th class="text-center" width="10px">Poin</th>
-                                        <th class="text-center" width="10px">Hari & Tanggal</th>
+                                        <th class="text-center" width="160px">Hari & Tanggal</th>
                                         <th class="text-center" width="10px">Action</th>
                                     </tr>
                                 </thead>
@@ -51,12 +51,12 @@
                                     @foreach ($bukuPelanggarans as $bukuPelanggaran)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $bukuPelanggaran->siswa->nama }}</td>
+                                        <td class="ps-3">{{ $bukuPelanggaran->siswa->nama }}</td>
                                         {{-- <td>{{ $bukuPelanggaran->tipePelanggaran->nama }}</td> --}}
-                                        <td>{{ $bukuPelanggaran->pelanggaran->deskripsi }}</td>
-                                        <td>{{ $bukuPelanggaran->guru->nama }}</td>
+                                        <td class="ps-3">{{ $bukuPelanggaran->pelanggaran->deskripsi }}</td>
+                                        {{-- <td>{{ $bukuPelanggaran->guru->nama }}</td> --}}
                                         <td class="text-center">{{ $bukuPelanggaran->poin }}</td>
-                                        <td class="text-center">{{ $bukuPelanggaran->formatted_tanggal }}</td>
+                                        <td class="ps-3">{{ $bukuPelanggaran->formatted_tanggal }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('buku-pelanggaran.edit', $bukuPelanggaran->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2">
                                                 <i class="material-icons">edit</i>

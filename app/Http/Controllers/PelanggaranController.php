@@ -16,7 +16,11 @@ class PelanggaranController extends Controller
 
     public function show($pelanggaran_id)
     {
-        $pelanggaran = Pelanggaran::with('bukuPelanggarans')->findOrFail($pelanggaran_id);
+        // Mengambil data pelanggaran dengan pengurutan berdasarkan tanggal terbaru
+        $pelanggaran = Pelanggaran::with(['bukuPelanggarans' => function ($query) {
+            $query->orderBy('hari_tanggal', 'desc');
+        }])->findOrFail($pelanggaran_id);
+
         return view('components.pelanggaran.pelanggaran', compact('pelanggaran'));
     }
 

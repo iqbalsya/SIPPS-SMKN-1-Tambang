@@ -41,6 +41,7 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'nis' => 'required|unique:siswas,nis',
             'nama' => 'required|string|max:255',

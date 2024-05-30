@@ -1,8 +1,8 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
-    <x-navbars.sidebar activePage="pelanggaran"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="lapor-keterlambatan"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Detail Pelanggaran"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Lapor Keterlambatan"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid">
             @if(session('success'))
@@ -22,33 +22,44 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-info shadow-info border-radius-lg pt-3 pb-3">
-                                <h5 class="text-white text-capitalize ps-3">Pelanggaran Siswa - {{ $pelanggaran->deskripsi }}</h5>
-                                <p class="text-white text-capitalize ps-3 fw-normal mt-n2 mb-1">Tipe Pelanggaran : {{ $pelanggaran->tipePelanggaran->nama }}</p>
+                                <h4 class="text-white text-capitalize ps-3">Lapor Keterlambatan Siswa</h4>
+                                <p class="text-white ps-3 fw-normal mt-n2 mb-1">Tambah keterlambatan dan cetak surat</p>
                             </div>
                         </div>
-                        <div class="container pt-4 mb-3">
+                        <div class="container pt-2 mb-3">
+                            <div class=" my-3 text-end">
+                                <a class="btn bg-gradient-info mb-0" href="{{ route('lapor-keterlambatan.create') }}">
+                                    <i class="material-icons text-xl">add</i>&nbsp;Lapor Keterlambatan
+                                </a>
+                            </div>
                             <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center" width="160px">Tanggal</th>
                                         <th class="text-center">Nama Siswa</th>
-                                        <th class="text-center" width="50px">Kelas</th>
+                                        <th class="text-center" width="70px">Kelas</th>
                                         <th class="text-center" width="100px">Jenis Kelamin</th>
-                                        <th class="text-center" width="240px">Guru Pelapor</th>
+                                        <th class="text-center" width="240px">Guru Piket</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pelanggaran->bukuPelanggarans as $index => $bukuPelanggaran)
+                                    @forelse ($pelanggaranTerlambat as $index => $bukuPelanggaran)
                                     <tr>
                                         <td class="text-center">{{ $index + 1 }}</td>
-                                        <td class="ps-3">{{ \Carbon\Carbon::parse($bukuPelanggaran->pivot->hari_tanggal)->locale('id')->translatedFormat('l, d F Y') }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->nama }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->kelas->nama }}</td>
-                                        <td class="text-center">{{ $bukuPelanggaran->gender->jenis }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->pivot->guru->nama }}</td>
+                                        <td class="ps-2">
+                                            {{ $bukuPelanggaran->formatted_tanggal ?? 'Tidak ada tanggal' }}
+                                        </td>
+                                        <td class="ps-3">{{ $bukuPelanggaran->siswa->nama ?? 'Tidak ada nama' }}</td>
+                                        <td class="text-center">{{ $bukuPelanggaran->siswa->kelas->nama ?? 'Tidak ada kelas' }}</td>
+                                        <td class="text-center">{{ $bukuPelanggaran->siswa->gender->jenis ?? 'Tidak ada gender' }}</td>
+                                        <td class="ps-3">{{ $bukuPelanggaran->guru->nama ?? 'Tidak ada guru' }}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">Tidak ada data pelanggaran terlambat datang ke sekolah.</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

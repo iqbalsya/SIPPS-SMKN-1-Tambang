@@ -40,7 +40,7 @@
                                         <th class="text-center">Nama</th>
                                         <th class="text-center" width="50px">Kelas</th>
                                         <th class="text-center" width="50px">Gender</th>
-                                        <th class="text-center" width="50px">Poin</th>
+                                        <th class="text-center" width="50px">Total Poin</th>
                                         <th class="text-center" width="50px">Action</th>
                                     </tr>
                                 </thead>
