@@ -19,14 +19,14 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
-                            <div class="bg-gradient-info shadow-info border-radius-lg pt-3 pb-3">
+                            <div class="bg-gradient-success shadow-success border-radius-lg pt-3 pb-3">
                                 <h4 class="text-white text-capitalize ps-3">Data Keterlambatan Siswa</h4>
                                 <p class="text-white ps-3 fw-normal mt-n2 mb-1">Lapor keterlambatan dan cetak surat izin masuk kelas</p>
                             </div>
                         </div>
                         <div class="container pt-2 mb-3">
                             <div class="my-3 text-end">
-                                <a class="btn bg-gradient-info mb-0" href="{{ route('lapor-keterlambatan.create') }}">
+                                <a class="btn bg-gradient-success mb-0" href="{{ route('lapor-keterlambatan.create') }}">
                                     <i class="material-icons text-xl">add</i>&nbsp;Lapor Keterlambatan
                                 </a>
                             </div>
@@ -75,8 +75,8 @@
                             lengthMenu: "Tampilkan _MENU_ data siswa",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ siswa",
                             paginate: {
-                                previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
-                                next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'
+                                previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
+                                next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
                         }
                     });

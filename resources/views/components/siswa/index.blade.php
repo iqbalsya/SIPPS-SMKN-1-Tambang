@@ -22,14 +22,14 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
-                            <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
-                                <h5 class="text-white text-capitalize ps-3">Daftar Siswa SMKN 1 Tambang</h5>
+                            <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
+                                <h4 class="text-white text-capitalize ps-3">Daftar Siswa SMKN 1 Tambang</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
                             <div class=" my-3 text-end">
-                                <a class="btn bg-gradient-info mb-0" href="{{ route('siswa.create') }}">
-                                    <i class="material-icons text-sm">add</i>&nbsp;Tambah Siswa
+                                <a class="btn bg-gradient-success mb-0" href="{{ route('siswa.create') }}">
+                                    <i class="material-icons text-xl">add</i>&nbsp;Tambah Siswa
                                 </a>
                             </div>
                             <table class="table table-striped table-bordered data-table mb-3">
@@ -79,8 +79,8 @@
                             lengthMenu: "Tampilkan _MENU_ data siswa",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ siswa",
                             paginate: {
-                                previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
-                                next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'
+                                previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
+                                next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
                         }
                     });

@@ -4,17 +4,17 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Dashboard"></x-navbars.navs.auth>
         <!-- End Navbar -->
-        <div class="container-fluid py-4">
+        <div class="container-fluid mt-3">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md text-dark fw-bold mb-0 mt-3 text-capitalize">Jumlah siswa</p>
-                                <h4 class="mb-0">400</h4>
+                                <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Jumlah siswa</p>
+                                <h4 class="mb-0 pe-2">{{ $totalSiswa }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-1 mt-0">
@@ -26,11 +26,11 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md text-dark fw-bold mb-0 mt-3 text-capitalize">Today's Money</p>
-                                <h4 class="mb-0">$53k</h4>
+                                <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Siswa Laki-laki</p>
+                                <h4 class="mb-0 pe-2">{{ $siswaLakiLaki }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-1 mt-0">
@@ -42,11 +42,11 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md text-dark fw-bold mb-0 mt-3 text-capitalize">Today's Money</p>
-                                <h4 class="mb-0">$53k</h4>
+                                <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Siswa Perempuan</p>
+                                <h4 class="mb-0 pe-2">{{ $siswaPerempuan }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-1 mt-0">
@@ -58,11 +58,11 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">local_library</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md text-dark fw-bold mb-0 mt-3 text-capitalize">Today's Money</p>
-                                <h4 class="mb-0">$53k</h4>
+                                <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Jumlah Guru</p>
+                                <h4 class="mb-0 pe-2">{{ $totalGuru }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-1 mt-0">
@@ -71,61 +71,74 @@
                 </div>
             </div>
 
-            <div class="row mt-4">
-                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+            <div class="row mt-2">
+                <div class="col-lg-6 col-md-6 mt-5 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-danger shadow-dark border-radius-lg py-3 pe-1">
+                            <div class="bg-gradient-warning shadow-dark border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="chart-line" class="chart-canvas" height="200"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pb-2">
                             <h6 class="mb-0 ">Grafik Total Pelanggaran Siswa</h6>
                             <p class="text-sm fw-normal">Jumlah pelanggaran yang terjadi setiap bulan.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                <div class="col-lg-6 col-md-6 mt-5 mb-4">
                     <div class="card z-index-2">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-danger shadow-dark border-radius-lg py-3 pe-1">
+                            <div class="bg-gradient-info shadow-dark border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-line-terlambat" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="chart-line-terlambat" class="chart-canvas" height="200"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pb-2">
                             <h6 class="mb-0 ">Grafik Keterlambatan Siswa</h6>
                             <p class="text-sm fw-normal">Jumlah siswa yang terlambat datang ke sekolah setiap bulan.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                <div class="col-lg-6 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-danger shadow-dark border-radius-lg py-3 pe-1">
+                            <div class="bg-gradient-info shadow-dark border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-line-alpa" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="chart-line-alpa" class="chart-canvas" height="200"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pb-2">
                             <h6 class="mb-0 ">Grafik Ketidakhadiran Siswa</h6>
                             <p class="text-sm fw-normal">Jumlah siswa yang tidak menghadiri sekolah tanpa keterangan.</p>
                         </div>
                     </div>
                 </div>
 
+            <div class="col-lg-6 col-md-6 mt-4 mb-4">
+                <div class="card z-index-2">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                        <div class="bg-gradient-info shadow-dark border-radius-lg py-3 pe-1">
+                            <div class="chart">
+                                <canvas id="chart-doughnut" class="chart-canvas" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-2">
+                        <h6 class="mb-0 ">Grafik Siswa Setiap Jurusan</h6>
+                        <p class="text-sm fw-normal">Jumlah siswa yang ada di setiap jurusan.</p>
+                    </div>
+                </div>
+
             </div>
 
-            <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
     <script>
@@ -133,6 +146,7 @@
             var ctxLine = document.getElementById("chart-line").getContext("2d");
             var ctxLineTerlambat = document.getElementById("chart-line-terlambat").getContext("2d");
             var ctxLineAlpa = document.getElementById("chart-line-alpa").getContext("2d");
+            var doughnutChartCanvas = document.getElementById("chart-doughnut").getContext("2d");
 
             $.ajax({
                 url: '/api/pelanggaran-bulanan',
@@ -399,7 +413,73 @@
                     console.log('Error:', error);
                 }
             });
+
+
+            $.ajax({
+                    url: '/api/jumlah-siswa-per-jurusan',
+                    method: 'GET',
+                    success: function(data) {
+                        var labels = data.map(function(jurusan) {
+                            return jurusan.jurusan;
+                        });
+                        var values = data.map(function(jurusan) {
+                            return jurusan.jumlah;
+                        });
+
+                        var ctx = document.getElementById('chart-doughnut').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Jumlah Siswa',
+                                    data: values,
+                                    backgroundColor: [
+                                        '#f5365c',
+                                        '#11cdef',
+                                        '#2dce89',
+                                        '#fb6340',
+                                        '#f4f4f8',
+                                        '#172b4d',
+                                        '#5e72e4',
+                                        '#2bffc6',
+                                        '#ffb8b8',
+                                        '#800000'
+                                    ],
+                                    hoverBackgroundColor: [
+                                        '#f5365c',
+                                        '#11cdef',
+                                        '#2dce89',
+                                        '#fb6340',
+                                        '#f4f4f8',
+                                        '#172b4d',
+                                        '#5e72e4',
+                                        '#2bffc6',
+                                        '#ffb8b8',
+                                        '#800000'
+                                    ]
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: 'white'
+                                    }
+                                }
+                            }
+                            }
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
+                    }
+                });
         });
+
 
     </script>
     @endpush

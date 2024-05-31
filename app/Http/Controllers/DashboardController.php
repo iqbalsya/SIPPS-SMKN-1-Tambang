@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BukuPelanggaran;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\Jurusan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -11,8 +14,20 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $totalSiswa = Siswa::count();
+        $siswaLakiLaki = Siswa::where('gender_id', 1)->count();
+        $siswaPerempuan = Siswa::where('gender_id', 2)->count();
+        $totalGuru = Guru::count();
+
+        return view('dashboard.index', [
+            'totalSiswa' => $totalSiswa,
+            'siswaLakiLaki' => $siswaLakiLaki,
+            'siswaPerempuan' => $siswaPerempuan,
+            'totalGuru' => $totalGuru,
+        ]);
+
     }
+
 
     public function getPelanggaranBulanan()
     {
@@ -83,4 +98,19 @@ class DashboardController extends Controller
 
         return response()->json($result);
     }
+
+
+    public function getJumlahSiswaPerJurusan()
+    {
+        $data = Jurusan::withCount('siswa')->get()->map(function ($jurusan) {
+            return [
+                'jurusan' => $jurusan->nama,
+                'jumlah' => $jurusan->siswa_count
+            ];
+        });
+
+        return response()->json($data);
+    }
+
+
 }

@@ -29,7 +29,7 @@
         <ul class="nav nav-pills nav-fill" role="tablist">
             <li class="nav-item">
                 <a class="nav-link mb-0 px-3 py-1 {{ $activePage == 'pelanggaran' ? 'active bg-danger text-white' : '' }}" href="{{ route('pelanggaran.index') }}">
-                    <i class="material-icons text-lg position-relative">home</i>
+                    <i class="material-icons text-lg position-relative">menu</i>
                     <span class="ms-1">List Pelanggaran</span>
                 </a>
             </li>
@@ -38,7 +38,7 @@
         <ul class="nav nav-pills nav-fill" role="tablist">
             <li class="nav-item">
                 <a class="nav-link mb-0 px-3 py-1 {{ $activePage == 'tipe-pelanggaran' ? 'active bg-danger text-white' : '' }}" href="{{ route('tipe-pelanggaran.index') }}">
-                    <i class="material-icons text-lg position-relative">email</i>
+                    <i class="material-icons text-lg position-relative">segment</i>
                     <span class="ms-1">Tipe Pelanggaran</span>
                 </a>
             </li>
@@ -47,7 +47,7 @@
         <ul class="nav nav-pills nav-fill" role="tablist">
             <li class="nav-item">
                 <a class="nav-link mb-0 px-3 py-1 {{ $activePage == 'sanksi-pelanggaran' ? 'active bg-danger text-white' : '' }}" href="{{ route('sanksi-pelanggaran.index') }}">
-                    <i class="material-icons text-lg position-relative">settings</i>
+                    <i class="material-icons text-lg position-relative">gavel</i>
                     <span class="ms-1">Sanksi Pelanggaran</span>
                 </a>
             </li>

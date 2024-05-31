@@ -51,6 +51,7 @@
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
 
+
             <style>
                 /* .nav-link.active {
                     background-color: #4ba64f !important; /* Warna latar belakang saat aktif */
@@ -203,6 +204,38 @@
                     border-radius: 28% !important;
                     color: #fff;
                     background-color: #4ba64f;
+                    border-color: rgb(189, 189, 189);
+                    margin: 0;
+                }
+
+                .page-pelanggaran .page-item.active .page-link {
+                    border-radius: 28% !important;
+                    color: #fff;
+                    background-color: #f44335;
+                    border-color: rgb(189, 189, 189);
+                    margin: 0;
+                }
+
+                .page-tipe-pelanggaran .page-item.active .page-link {
+                    border-radius: 28% !important;
+                    color: #fff;
+                    background-color: #f44335;
+                    border-color: rgb(189, 189, 189);
+                    margin: 0;
+                }
+
+                .page-sanksi-pelanggaran .page-item.active .page-link {
+                    border-radius: 28% !important;
+                    color: #fff;
+                    background-color: #f44335;
+                    border-color: rgb(189, 189, 189);
+                    margin: 0;
+                }
+
+                .page-detail-pelanggaran .page-item.active .page-link {
+                    border-radius: 28% !important;
+                    color: #fff;
+                    background-color: #f44335;
                     border-color: rgb(189, 189, 189);
                     margin: 0;
                 }

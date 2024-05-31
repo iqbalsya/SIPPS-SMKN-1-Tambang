@@ -1,6 +1,6 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.sidebar activePage="pelanggaran"></x-navbars.sidebar>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg page-pelanggaran">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Pelanggaran"></x-navbars.navs.auth>
         <!-- End Navbar -->
@@ -84,8 +84,8 @@
                             lengthMenu: "Tampilkan _MENU_ data pelanggaran",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ pelanggaran",
                             paginate: {
-                                previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
-                                next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'
+                                previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
+                                next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
                         }
                     });

@@ -28,7 +28,7 @@
                         <div class="container mt-2 mb-3">
                             <div class="my-3 text-end">
                                 <a class="btn bg-gradient-success mb-0" href="{{ route('kelas.create') }}">
-                                    <i class="material-icons text-sm">add</i>&nbsp;Tambah Kelas
+                                    <i class="material-icons text-xl">add</i>&nbsp;Tambah Kelas
                                 </a>
                             </div>
                             <table class="table table-striped table-bordered data-table text-center mb-3">
@@ -76,8 +76,8 @@
                             lengthMenu: "Tampilkan _MENU_ data kelas",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ kelas",
                             paginate: {
-                                previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
-                                next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'
+                                previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
+                                next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
                         }
                     });

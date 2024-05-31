@@ -86,8 +86,8 @@
                             lengthMenu: "Tampilkan _MENU_ data buku pelanggaran",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ pelanggaran",
                             paginate: {
-                                previous: '<i class="fas fa-angle-double-left" style="font-size: 1.1rem;"></i>',
-                                next: '<i class="fas fa-angle-double-right" style="font-size: 1.1rem;"></i>'
+                                previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
+                                next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
                         }
                     });

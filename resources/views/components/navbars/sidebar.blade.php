@@ -7,7 +7,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
-            <img src="{{ asset('assets') }}/img/drake.jpg" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ asset('assets') }}/img/smk1.png" class="navbar-brand-img pb-sm-1" alt="main_logo" height="100px">
             <span class="ms-2 font-weight-bold text-white">SIPPS<br>SMKN 1 Tambang</span>
         </a>
     </div>
@@ -16,7 +16,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'user-profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user-profile') }}">
-                    <i class="fas fa-user-circle" style="font-size: 1.2rem; margin-right: 8px;"></i>
+                    <i class="material-icons opacity-10 pb-1" style="font-size: 1.8rem; margin-right: 8px;">account_circle</i>
                     <span class="nav-link-text">User Profile</span>
                 </a>
             </li>
@@ -45,7 +45,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'siswa' ? ' active bg-gradient-info' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'siswa' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('siswa.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10 pb-1">person</i>
@@ -55,20 +55,20 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'guru' ? ' active bg-gradient-info' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'guru' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('guru.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">person_4</i>
+                        <i class="material-icons opacity-10 pb-1">local_library</i>
                     </div>
                     <span class="nav-link-text ms-1">Guru</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'kelas' ? ' active bg-gradient-info' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'kelas' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('kelas.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">groups</i>
+                        <i class="material-icons opacity-10 pb-1">people</i>
                     </div>
                     <span class="nav-link-text ms-1">Kelas</span>
                 </a>
@@ -88,7 +88,7 @@
                 <a class="nav-link text-white {{ $activePage == 'pelanggaran' ? ' active bg-gradient-danger' : '' }} "
                     href="{{ route('pelanggaran.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">groups</i>
+                        <i class="material-icons opacity-10 pb-1">book</i>
                     </div>
                     <span class="nav-link-text ms-1">Tata Tertib</span>
                 </a>
@@ -118,7 +118,7 @@
                 <a class="nav-link text-white {{ $activePage == 'buku-pelanggaran' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('buku-pelanggaran.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">groups</i>
+                        <i class="material-icons opacity-10 pb-1">menu_book</i>
                     </div>
                     <span class="nav-link-text ms-1">Buku Pelanggaran</span>
                 </a>
@@ -128,7 +128,7 @@
                 <a class="nav-link text-white {{ $activePage == 'lapor-keterlambatan' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('lapor-keterlambatan.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">groups</i>
+                        <i class="material-icons opacity-10 pb-1">assignment_late</i>
                     </div>
                     <span class="nav-link-text ms-1">Lapor Keterlambatan</span>
                 </a>

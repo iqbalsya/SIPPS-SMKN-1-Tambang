@@ -7,8 +7,8 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
-                            <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
-                                <h5 class="text-white text-capitalize ps-3">Profil Siswa - {{ $siswa->nama }}</h5>
+                            <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
+                                <h4 class="text-white text-capitalize ps-3">Profil Siswa - {{ $siswa->nama }}</h4>
                             </div>
                         </div>
                         <div class="container mt-4 mb-5">
@@ -21,7 +21,7 @@
                                             <img src="{{ asset('assets/img/boy.jpg') }}"
                                                 alt="Profile Image"
                                                 class="w-75 img-fluid rounded-circle mb-3"
-                                                style="border: 5px solid #283686; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
                                         @else
                                             <img src="{{ asset('assets/img/girl.jpg') }}"
                                                 alt="Profile Image"

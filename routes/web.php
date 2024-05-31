@@ -89,6 +89,9 @@ Route::get('/api/pelanggaran-terlambat', [DashboardController::class, 'getPelang
 
 Route::get('/api/pelanggaran-alpa', [DashboardController::class, 'getPelanggaranAlpa'])->middleware('auth');
 
+Route::get('/api/jumlah-siswa-per-jurusan', [DashboardController::class, 'getJumlahSiswaPerJurusan']);
+
+
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 
 
