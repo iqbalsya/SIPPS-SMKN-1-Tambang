@@ -23,7 +23,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-info shadow-info border-radius-lg pt-3 pb-3">
                                 <h4 class="text-white text-capitalize ps-3">Jurusan {{ $jurusan->nama }}</h4>
-                                <p class="text-white text-capitalize ps-3 fw-normal mt-n2 mb-1">Koordinator Jurusan : {{ $jurusan->guru->nama }}</p>
+                                <p class="text-white text-capitalize ps-3 fw-normal mt-n2 mb-1">Ketua Jurusan : {{ $jurusan->guru->nama }}</p>
                             </div>
                         </div>
                         <div class="container pt-4 mb-3">

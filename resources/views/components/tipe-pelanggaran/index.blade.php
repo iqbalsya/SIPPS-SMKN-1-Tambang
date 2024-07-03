@@ -44,6 +44,7 @@
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center">Tipe Pelanggaran</th>
+                                        <th class="text-center" width="180px">Banyak Pelanggaran</th>
                                         <th class="text-center" width="104px">Action</th>
                                     </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="ps-4">{{ $tp->nama }}</td>
+                                        <td class="ps-4 text-center">{{ $tp->jumlah_pelanggaran }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('tipe-pelanggaran.edit', $tp->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 

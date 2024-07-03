@@ -10,7 +10,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Tambah Tipe Pelanggaran</h6>
+                                <h4 class="text-white text-capitalize ps-3">Tambah Tipe Pelanggaran</h4>
                             </div>
                         </div>
                         <div class="card-body">

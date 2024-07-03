@@ -29,8 +29,8 @@
                         <div class="container pt-4 mb-3">
                             <div class="mb-4">
                                 <span class="badge bg-gradient-info px-4 py-3 fs-7">Jumlah Siswa : {{ $kelas->jumlah_siswa }}</span>
-                                <span class="badge bg-gradient-info px-4 py-3 mx-3 fs-7">Jumlah Siswa laki-laki : {{ $kelas->jumlah_siswa_laki_laki }}</span>
-                                <span class="badge bg-gradient-info px-4 py-3 fs-7">Jumlah Siswa Perempuan : {{ $kelas->jumlah_siswa_perempuan }}</span>
+                                <span class="badge bg-gradient-info px-4 py-3 mx-3 fs-7">Siswa laki-laki : {{ $kelas->jumlah_siswa_laki_laki }}</span>
+                                <span class="badge bg-gradient-info px-4 py-3 fs-7">Siswa Perempuan : {{ $kelas->jumlah_siswa_perempuan }}</span>
                             </div>
                             <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">

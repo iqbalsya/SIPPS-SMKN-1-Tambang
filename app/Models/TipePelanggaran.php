@@ -25,4 +25,9 @@ class TipePelanggaran extends Model
             ->withPivot(['poin', 'hari_tanggal', 'guru_id', 'siswa_id'])
             ->withTimestamps();
     }
+
+    public function getJumlahPelanggaranAttribute()
+    {
+        return $this->pelanggarans()->count();
+    }
 }

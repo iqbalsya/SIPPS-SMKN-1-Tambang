@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">person</i>
+                                <i class="material-icons opacity-10">person_4</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Siswa Laki-laki</p>
@@ -42,7 +42,7 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">person</i>
+                                <i class="material-icons opacity-10">person_3</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-md text-dark fw-normal mb-0 mt-3 text-capitalize">Siswa Perempuan</p>
@@ -467,7 +467,9 @@
                                 legend: {
                                     position: 'bottom',
                                     labels: {
-                                        color: 'white'
+                                        color: 'white',
+                                        boxWidth: 20,
+                                        padding: 12
                                     }
                                 }
                             }

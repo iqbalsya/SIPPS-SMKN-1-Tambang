@@ -7,8 +7,11 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
-            <img src="{{ asset('assets') }}/img/smk1.png" class="navbar-brand-img pb-sm-1" alt="main_logo" height="100px">
-            <span class="ms-2 font-weight-bold text-white">SIPPS<br>SMKN 1 Tambang</span>
+             {{-- <img src="{{ asset('assets') }}/img/smk1.png" class="navbar-brand-img mb-3 me-2" alt="main_logo"> --}}
+            <div class="mt-n2 ms-n2">
+                <h5 class="fs-4 font-weight-bold text-white">SIPPS</h5>
+                <h6 class="fs-6 mt-n3 font-weight-normal text-white">SMKN 1 Tambang</h6>
+            </div>
         </a>
     </div>
 
@@ -20,17 +23,6 @@
                     <span class="nav-link-text">User Profile</span>
                 </a>
             </li>
-
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('user-management') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">User Management</span>
-                </a>
-            </li> --}}
 
                 <hr class="flex-grow-1 border-white opacity-8 ms-3 me-3 mt-2 mb-2">
 

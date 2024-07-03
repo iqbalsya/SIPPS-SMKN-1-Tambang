@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-Use Str;
+use Illuminate\Support\Str;
 Use Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
@@ -22,11 +22,14 @@ class SessionsController extends Controller
         $attributes = request()->validate([
             'email' => 'required|email',
             'password' => 'required'
+        ], [
+            'email.required' => 'Email wajib diisi.',
+            'password.required' => 'Password siswa wajib diisi.'
         ]);
 
         if (! auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
+                'email' => 'Email atau password yang kamu masukkan salah',
             ]);
         }
 
@@ -44,34 +47,34 @@ class SessionsController extends Controller
         $status = Password::sendResetLink(
             request()->only('email')
         );
-    
+
         return $status === Password::RESET_LINK_SENT
                     ? back()->with(['status' => __($status)])
                     : back()->withErrors(['email' => __($status)]);
-        
+
     }
 
     public function update(){
-        
+
         request()->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
-        ]); 
-          
+        ]);
+
         $status = Password::reset(
             request()->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
                 $user->forceFill([
                     'password' => ($password)
                 ])->setRememberToken(Str::random(60));
-    
+
                 $user->save();
-    
+
                 event(new PasswordReset($user));
             }
         );
-    
+
         return $status === Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);

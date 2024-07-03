@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\SuratController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -33,6 +32,7 @@ use App\Http\Controllers\TipePelanggaranController;
 use App\Http\Controllers\SanksiPelanggaranController;
 use App\Http\Controllers\LaporKeterlambatanController;
 
+
 Route::resource('guru', GuruController::class);
 
 Route::resource('jurusan', JurusanController::class);
@@ -43,22 +43,18 @@ Route::resource('tipe-pelanggaran', TipePelanggaranController::class);
 
 Route::resource('sanksi-pelanggaran', SanksiPelanggaranController::class);
 
+
 Route::get('/get-siswa/{kelasId}', [BukuPelanggaranController::class, 'getSiswa']);
-
 Route::get('/get-pelanggaran/{tipePelanggaranId}', [BukuPelanggaranController::class, 'getPelanggaran']);
-
 Route::resource('buku-pelanggaran', BukuPelanggaranController::class);
-
 Route::get('/buku-pelanggaran/create/{siswa_id?}', [BukuPelanggaranController::class, 'create'])->name('buku-pelanggaran.create');
 
 
 Route::get('/lapor-keterlambatan', [LaporKeterlambatanController::class, 'index'])->name('lapor-keterlambatan.index');
-
 Route::get('lapor-keterlambatan/create', [LaporKeterlambatanController::class, 'create'])->name('lapor-keterlambatan.create');
-
 Route::post('lapor-keterlambatan', [LaporKeterlambatanController::class, 'store'])->name('lapor-keterlambatan.store');
-
 Route::get('lapor-keterlambatan/create/{id}', [LaporKeterlambatanController::class, 'cetakSurat'])->name('lapor-keterlambatan.cetak');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
@@ -68,8 +64,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::put('/siswa/{siswa}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{siswa}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
-
 });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
@@ -80,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/kelas/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
     Route::delete('/kelas/{kelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
 });
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 

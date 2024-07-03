@@ -13,7 +13,7 @@
                         </div>
                         <div class="container mt-4 mb-5">
                             <div class="row d-flex justify-content-between mt-2">
-                                <!-- Profile Illustration and Details -->
+
                                 <div class="card col-md-4 text-center border-success shadow-lg p-3 bg-body rounded" style="max-width: 26rem;">
 
                                     <div class="px-3 pt-3">
@@ -62,9 +62,9 @@
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link fs-6 fw-bold link-dark" id="pelanggaran-tab" data-bs-toggle="tab" data-bs-target="#pelanggaran" type="button" role="tab" aria-controls="pelanggaran" aria-selected="false">Pelanggaran</button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
+                                        {{-- <li class="nav-item" role="presentation">
                                             <button class="nav-link fs-6 fw-bold link-dark" id="sanksi-tab" data-bs-toggle="tab" data-bs-target="#sanksi" type="button" role="tab" aria-controls="sanksi" aria-selected="false">Sanksi</button>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <!-- Biodata Content -->
@@ -134,10 +134,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <!-- Sanksi Content -->
+                                        {{-- <!-- Sanksi Content -->
                                         <div class="tab-pane fade" id="sanksi" role="tabpanel" aria-labelledby="sanksi-tab">
                                             <p>Content for Sanksi</p>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
