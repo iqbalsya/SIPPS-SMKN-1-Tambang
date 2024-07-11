@@ -15,7 +15,7 @@
         </a>
     </div>
 
-    <hr class="horizontal light mt-0 mb-2">
+    <hr class="horizontal light opacity-6 mt-0 mb-2">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'user-profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user-profile') }}">

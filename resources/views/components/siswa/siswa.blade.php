@@ -113,20 +113,20 @@
                                             <table class="table table-striped mt-3">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center" width="24px">Tanggal</th>
+                                                        <th>Tanggal</th>
                                                         <th>Pelanggaran</th>
-                                                        <th width="50px">Tipe Pelanggaran</th>
+                                                        {{-- <th width="50px">Tipe Pelanggaran</th> --}}
                                                         <th class="text-center" width="24px">Poin</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($siswa->bukuPelanggarans as $pelanggaran)
                                                         <tr>
-                                                            <td class="text-center">{{ $pelanggaran->pivot->formatted_tanggal }}</td>
+                                                            <td>{{ $pelanggaran->pivot->formatted_tanggal }}</td>
 
                                                             <td class="ps-4">{{ $pelanggaran->pivot->pelanggaran->deskripsi}}</td>
 
-                                                            <td class="ps-4">{{ $pelanggaran->pivot->tipePelanggaran->nama}}</td>
+                                                            {{-- <td class="ps-4">{{ $pelanggaran->pivot->tipePelanggaran->nama}}</td> --}}
 
                                                             <td class="text-center">{{ $pelanggaran->pivot->poin }}</td>
                                                         </tr>
