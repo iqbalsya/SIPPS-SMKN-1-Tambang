@@ -34,26 +34,34 @@
                                 <thead class="table-dark">
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
-                                        <th class="text-center" width="160px">Tanggal</th>
-                                        <th class="text-center">Nama Siswa</th>
-                                        <th class="text-center" width="70px">Kelas</th>
-                                        <th class="text-center" width="100px">Jenis Kelamin</th>
+                                        <th class="text-center" width="50px">Tanggal</th>
+                                        <th class="text-center" width="440px">Nama Siswa</th>
+                                        <th class="text-center" width="20px">Kelas</th>
+                                        <th class="text-center" width="20px">Gender</th>
                                         <th class="text-center" width="240px">Guru Piket</th>
-                                        <th class="text-center" width="10px">Action</th>
+                                        <th class="text-center" width="10px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($pelanggaranTerlambat as $index => $bukuPelanggaran)
                                     <tr>
                                         <td class="text-center">{{ $index + 1 }}</td>
-                                        <td class="ps-2">{{ $bukuPelanggaran->formatted_tanggal ?? 'Tidak ada tanggal' }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->siswa->nama ?? 'Tidak ada nama' }}</td>
-                                        <td class="text-center">{{ $bukuPelanggaran->siswa->kelas->nama ?? 'Tidak ada kelas' }}</td>
-                                        <td class="text-center">{{ $bukuPelanggaran->siswa->gender->jenis ?? 'Tidak ada gender' }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->guru->nama ?? 'Tidak ada guru' }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('lapor-keterlambatan.cetak', $bukuPelanggaran->id) }}" class="edit btn btn-info btn-link btn-md m-0 py-2"><i class="material-icons">description</i></a>
+
+                                        <td class="ps-2">
+                                            {{ $bukuPelanggaran->hari }}, {{ $bukuPelanggaran->formatted_tanggal ?? 'Tidak ada tanggal' }}
                                         </td>
+
+                                        <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $bukuPelanggaran->siswa->nama ?? 'Tidak ada nama' }}</td>
+
+                                        <td class="ps-2">{{ $bukuPelanggaran->siswa->kelas->nama ?? 'Tidak ada kelas' }}</td>
+
+                                        <td class="ps-2">{{ $bukuPelanggaran->siswa->gender->jenis ?? 'Tidak ada gender' }}</td>
+
+                                        <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $bukuPelanggaran->guru->nama ?? 'Tidak ada guru' }}</td>
+                                        
+                                        <td class="text-center">
+                                            <a href="{{ route('lapor-keterlambatan.show', $bukuPelanggaran->id) }}" class="edit btn btn-info btn-link btn-md m-0 py-2 px-3"><i class="material-icons">visibility</i></a>
+                                        </td>                                        
                                     </tr>
                                     @empty
                                     <tr>

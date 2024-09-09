@@ -12,10 +12,12 @@ class Guru extends Model
     protected $table = 'gurus';
 
     protected $fillable = [
-        'nama', 'nuptk', 'nip', 'posisi',
+        'nama', 'nip_nuptk', 'pangkat_gol_jabatan', 'tugas_tambahan',
         'gender_id', 'agama_id', 'tempat_lahir',
         'tanggal_lahir', 'alamat', 'telepon'
     ];
+
+    protected $with = ['gender', 'agama'];
 
     public function gender()
     {
@@ -25,6 +27,11 @@ class Guru extends Model
     public function agama()
     {
         return $this->belongsTo(Agama::class, 'agama_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function kelas()
@@ -41,4 +48,22 @@ class Guru extends Model
     {
         return $this->hasMany(BukuPelanggaran::class);
     }
+
+    public function laporanPelanggaran()
+    {
+        return $this->hasMany(LaporanPelanggaran::class);
+    }
+
+    // public function bukuPelanggarans()
+    // {
+    //     return $this->belongsToMany(Pelanggaran::class, 'buku_pelanggarans')
+    //         ->using(BukuPelanggaran::class)
+    //         ->withPivot(['poin', 'hari_tanggal', 'guru_id', 'siswa_id'])
+    //         ->withTimestamps();
+    // }
+
+    // public function getNamaAttribute($value)
+    // {
+    //     return ucwords(strtolower($value));
+    // }
 }

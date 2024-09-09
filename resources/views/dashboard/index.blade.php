@@ -155,7 +155,7 @@
                     new Chart(ctxLine, {
                         type: "line",
                         data: {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                            labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                             datasets: [{
                                 label: "Pelanggaran",
                                 tension: 0,
@@ -244,7 +244,7 @@
                     new Chart(ctxLineTerlambat, {
                         type: "line",
                         data: {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                            labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                             datasets: [{
                                 label: "Siswa Terlambat",
                                 tension: 0,
@@ -333,7 +333,7 @@
                     new Chart(ctxLineAlpa, {
                         type: "line",
                         data: {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                            labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                             datasets: [{
                                 label: "Siswa Alpa",
                                 tension: 0,

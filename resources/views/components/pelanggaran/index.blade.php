@@ -23,7 +23,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-danger shadow-danger border-radius-lg pt-4 pb-3">
-                                <h4 class="text-white text-capitalize ps-3">Daftar Pelanggaran</h4>
+                                <h4 class="text-white text-capitalize ps-3">Daftar Bentuk Pelanggaran</h4>
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
@@ -32,11 +32,13 @@
 
                                 <x-navbars.navs.pelanggaran activePage="pelanggaran"></x-navbars.navs.pelanggaran>
 
-                                <div class="my-3">
-                                    <a class="btn bg-gradient-danger mb-0" href="{{ route('pelanggaran.create') }}">
-                                        <i class="material-icons text-xl position-relative">add</i>&nbsp;Tambah Pelanggaran
-                                    </a>
-                                </div>
+                                @haspermission('mengelola pelanggaran')
+                                    <div class="my-3">
+                                        <a class="btn bg-gradient-danger mb-0" href="{{ route('pelanggaran.create') }}">
+                                            <i class="material-icons text-xl position-relative">add</i>&nbsp;Tambah Pelanggaran
+                                        </a>
+                                    </div>
+                                @endhaspermission
                             </div>
 
                             <table class="table table-striped table-bordered data-table mb-3">
@@ -44,28 +46,34 @@
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center">Deskripsi</th>
-                                        <th class="text-center" width="200px">Tipe Pelanggaran</th>
+                                        <th class="text-center" width="80px">Tipe Pelanggaran</th>
                                         <th class="text-center" width="16px">Poin</th>
-                                        <th class="text-center" width="104px">Action</th>
+                                        <th class="text-center" width="80px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pelanggaran as $p)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="ps-4">{{ $p->deskripsi }}</td>
+
+                                        <td class="ps-3" style="word-wrap: break-word; white-space: normal;">{{ $p->deskripsi }}</td>
+
                                         <td class="text-center">{{ $p->tipePelanggaran->nama }}</td>
+
                                         <td class="text-center">{{ $p->poin }}</td>
+
                                         <td class="text-center">
                                             <a href="{{ route('pelanggaran.show', $p->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
-                                            <a href="{{ route('pelanggaran.edit', $p->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                            @haspermission('mengelola pelanggaran')
+                                                <a href="{{ route('pelanggaran.edit', $p->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('pelanggaran.destroy', $p->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
-                                            </form>
+                                                <form action="{{ route('pelanggaran.destroy', $p->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
+                                                </form>
+                                            @endhaspermission
                                         </td>
                                     </tr>
                                     @endforeach

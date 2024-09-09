@@ -32,11 +32,13 @@
 
                                 <x-navbars.navs.pelanggaran activePage="tipe-pelanggaran"></x-navbars.navs.pelanggaran>
 
-                                <div class="my-3 text-end">
-                                    <a class="btn bg-gradient-danger mb-0" href="{{ route('tipe-pelanggaran.create') }}">
-                                        <i class="material-icons text-xl position-relative">add</i>&nbsp;Tambah Tipe Pelanggaran
-                                    </a>
-                                </div>
+                                @haspermission('mengelola tipe pelanggaran')
+                                    <div class="my-3 text-end">
+                                        <a class="btn bg-gradient-danger mb-0" href="{{ route('tipe-pelanggaran.create') }}">
+                                            <i class="material-icons text-xl position-relative">add</i>&nbsp;Tambah Tipe Pelanggaran
+                                        </a>
+                                    </div>
+                                @endhaspermission
                             </div>
 
                             <table class="table table-striped table-bordered data-table mb-3">
@@ -45,7 +47,9 @@
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center">Tipe Pelanggaran</th>
                                         <th class="text-center" width="180px">Banyak Pelanggaran</th>
-                                        <th class="text-center" width="104px">Action</th>
+                                        @haspermission('mengelola tipe pelanggaran')
+                                            <th class="text-center" width="104px">Aksi</th>
+                                        @endhaspermission
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,15 +58,17 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="ps-4">{{ $tp->nama }}</td>
                                         <td class="ps-4 text-center">{{ $tp->jumlah_pelanggaran }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('tipe-pelanggaran.edit', $tp->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                        @haspermission('mengelola tipe pelanggaran')
+                                            <td class="text-center">
+                                                <a href="{{ route('tipe-pelanggaran.edit', $tp->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('tipe-pelanggaran.destroy', $tp->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
-                                            </form>
-                                        </td>
+                                                <form action="{{ route('tipe-pelanggaran.destroy', $tp->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
+                                                </form>
+                                            </td>
+                                        @endhaspermission
                                     </tr>
                                     @endforeach
                                 </tbody>

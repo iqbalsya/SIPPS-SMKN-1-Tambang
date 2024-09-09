@@ -36,29 +36,33 @@
                                 <thead class="table-dark">
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
+                                        <th class="text-center" width="50px">NIS/NISN</th>
                                         <th class="text-center">Nama Siswa</th>
-                                        <th class="text-center" width="100px">Gender</th>
+                                        <th class="text-center" width="72px">Gender</th>
                                         <th class="text-center" width="16px">Total Poin</th>
-                                        <th class="text-center" width="120px">Action</th>
+                                        <th class="text-center" width="50px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($kelas->siswa as $siswa)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="ps-4">{{ $siswa->nama }}</td>
-                                        <td class="text-center">{{ $siswa->gender->jenis }}</td>
+                                        <td class="ps-3">{{ $siswa->nis_nisn }}</td>
+                                        <td class="ps-3">{{ $siswa->nama }}</td>
+                                        <td class="ps-3">{{ $siswa->gender->jenis }}</td>
                                         <td class="text-center">{{ $siswa->total_poin }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('siswa.show', $siswa->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
-                                            <a href="{{ route('siswa.edit', $siswa->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                            @haspermission('mengelola siswa')
+                                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
-                                            </form>
+                                                <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
+                                                </form>
+                                            @endhaspermission
                                         </td>
                                     </tr>
                                     @endforeach

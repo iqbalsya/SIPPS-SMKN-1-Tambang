@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Gender;
 use App\Models\Agama;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
@@ -15,15 +16,7 @@ class GuruController extends Controller
         return view('components.guru.index', compact('guru'));
     }
 
-    public function create()
-    {
-        $genders = Gender::all();
-        $agamas = Agama::all();
-        $guru = new Guru();
-        return view('components.guru.create', compact('guru', 'genders', 'agamas'));
-    }
-
-        public function show($id)
+    public function show($id)
     {
         $guru = Guru::findOrFail($id);
         $totalPelanggaran = $guru->bukuPelanggarans()->count();
@@ -32,13 +25,34 @@ class GuruController extends Controller
         return view('components.guru.guru', compact('guru', 'totalPelanggaran', 'totalPoin'));
     }
 
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $guru = Guru::where('id', $user->guru_id)->firstOrFail();
+    
+        $totalPelanggaran = $guru->bukuPelanggarans()->count();
+    
+        return view('components.guru-profile.profile', compact('guru', 'totalPelanggaran'));
+    }
+
+
+    public function create()
+    {
+        $genders = Gender::all();
+        $agamas = Agama::all();
+        $guru = new Guru();
+        return view('components.guru.create', compact('guru', 'genders', 'agamas'));
+    }
+    
+
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'nuptk' => 'required|unique:gurus,nuptk',
-            'nip' => 'nullable|string|max:255',
-            'posisi' => 'nullable|string|max:255',
+            'nip_nuptk' => 'required|unique:gurus,nip_nuptk',
+            'pangkat_gol_jabatan' => 'nullable|string|max:255',
+            'tugas_tambahan' => 'nullable|string|max:255',
             'gender_id' => 'required|exists:genders,id',
             'agama_id' => 'required|exists:agamas,id',
             'tempat_lahir' => 'nullable|string|max:255',
@@ -47,8 +61,8 @@ class GuruController extends Controller
             'telepon' => 'nullable|string|max:255',
         ], [
             'nama.required' => 'Nama guru wajib diisi.',
-            'nuptk.required' => 'NUPTK guru wajib diisi.',
-            'nuptk.unique' => 'NUPTK sudah ada.',
+            'nip_nuptk.required' => 'NIP/NUPTK guru wajib diisi.',
+            'nip_nuptk.unique' => 'NIP/NUPTK sudah ada.',
             'gender_id.required' => 'Gender guru wajib diisi.',
             'gender_id.exists' => 'Gender guru tidak valid.',
             'agama_id.required' => 'Agama guru wajib diisi.',
@@ -71,9 +85,9 @@ class GuruController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'nuptk' => 'required',
-            'nip' => 'nullable|string|max:255',
-            'posisi' => 'nullable|string|max:255',
+            'nip_nuptk' => 'required|string|max:255|unique:gurus,nip_nuptk,' . $guru->id,
+            'pangkat_gol_jabatan' => 'nullable|string|max:255',
+            'tugas_tambahan' => 'nullable|string|max:255',
             'gender_id' => 'required|exists:genders,id',
             'agama_id' => 'required|exists:agamas,id',
             'tempat_lahir' => 'nullable|string|max:255',
@@ -82,7 +96,8 @@ class GuruController extends Controller
             'telepon' => 'nullable|string|max:255',
         ], [
             'nama.required' => 'Nama guru wajib diisi.',
-            'nuptk.required' => 'NUPTK guru wajib diisi.',
+            'nip_nuptk.required' => 'NIP/NUPTK guru wajib diisi.',
+            'nip_nuptk.unique' => 'NIP/NUPTK sudah ada.',
             'gender_id.required' => 'Gender guru wajib diisi.',
             'gender_id.exists' => 'Gender guru tidak valid.',
             'agama_id.required' => 'Agama guru wajib diisi.',
@@ -93,6 +108,7 @@ class GuruController extends Controller
 
         return redirect()->route('guru.index')->with('success', 'Guru telah diperbarui');
     }
+
 
     public function destroy(Guru $guru)
     {

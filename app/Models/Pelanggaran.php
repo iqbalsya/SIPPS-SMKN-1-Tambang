@@ -13,6 +13,8 @@ class Pelanggaran extends Model
         'deskripsi', 'tipe_pelanggaran_id', 'poin',
     ];
 
+    protected $with = ['tipePelanggaran'];
+
     public function tipePelanggaran()
     {
         return $this->belongsTo(TipePelanggaran::class);

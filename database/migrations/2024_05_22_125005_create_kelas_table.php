@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('guru_id');
             $table->unsignedBigInteger('jurusan_id');
-            $table->string('nama', 255);
+            $table->string('nama', 255)->unique();
             $table->integer('jumlah_siswa')->nullable();
             $table->timestamps();
 

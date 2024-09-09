@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
-    <x-navbars.sidebar activePage="tables"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="siswa"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tambah Siswa"></x-navbars.navs.auth>
@@ -10,7 +10,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Tambah Siswa</h6>
+                                <h4 class="text-white text-capitalize ps-3">Tambah Siswa</h4>
                             </div>
                         </div>
                         <div class="card-body">
@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label for="nama">Nama&nbsp;<span class="text-danger">*</span></label>
+                                            <label for="nama">Nama Lengkap&nbsp;<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
                                             @error('nama')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -28,20 +28,13 @@
                                         </div>
 
                                         <div class="form-group mb-3">
-                                            <label for="nis">NIS&nbsp;<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}">
-                                            @error('nis')
+                                            <label for="nis_nisn">NIS/NISN&nbsp;<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('nis_nisn') is-invalid @enderror" id="nis_nisn" name="nis_nisn" value="{{ old('nis_nisn') }}">
+                                            @error('nis_nisn')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                            <label for="nisn">NISN&nbsp;<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn" name="nisn" value="{{ old('nisn') }}">
-                                            @error('nisn')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
 
                                         <div class="form-group mb-3">
                                             <label for="jurusan_id">Jurusan&nbsp;<span class="text-danger">*</span></label>
@@ -94,6 +87,11 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="alamat">Alamat</label>
+                                            <textarea class="form-control" id="alamat" name="alamat">{{ old('alamat') }}</textarea>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -108,6 +106,26 @@
                                         </div>
 
                                         <div class="form-group mb-3">
+                                            <label for="telepon">Telepon</label>
+                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="status_dalam_keluarga">Status Dalam Keluarga</label>
+                                            <select class="form-select" name="status_dalam_keluarga">
+                                                <option value="" selected disabled>Pilih</option>
+                                                <option value="Anak kandung" {{ old('status_dalam_keluarga') == 'Anak kandung' ? 'selected' : '' }}>Anak kandung</option>
+                                                <option value="Anak angkat" {{ old('status_dalam_keluarga') == 'Anak angkat' ? 'selected' : '' }}>Anak angkat</option>
+                                                <option value="Tinggal bersama wali" {{ old('status_dalam_keluarga') == 'Tinggal bersama wali' ? 'selected' : '' }}>Tinggal bersama wali</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="anak_ke">Anak Ke</label>
+                                            <input type="number" class="form-control" id="anak_ke" name="anak_ke" value="{{ old('anak_ke') }}">
+                                        </div>
+
+                                        <div class="form-group mb-3">
                                             <label for="nama_ayah">Nama Ayah</label>
                                             <input type="text" class="form-control" id="nama_ayah" name="nama_ayah" value="{{ old('nama_ayah') }}">
                                         </div>
@@ -118,15 +136,11 @@
                                         </div>
 
                                         <div class="form-group mb-3">
-                                            <label for="telepon">Telepon</label>
-                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon') }}">
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label for="alamat">Alamat</label>
-                                            <textarea class="form-control" id="alamat" name="alamat">{{ old('alamat') }}</textarea>
+                                            <label for="alamat_orang_tua">Alamat Orang Tua</label>
+                                            <textarea class="form-control" id="alamat_orang_tua" name="alamat_orang_tua">{{ old('alamat_orang_tua') }}</textarea>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="d-flex justify-content-end">

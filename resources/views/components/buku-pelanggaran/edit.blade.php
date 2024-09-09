@@ -22,9 +22,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
+                                            <!-- Menggunakan $kelasList -->
                                             <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" onchange="fetchSiswa(this.value)">
                                                 <option value="" selected disabled>Pilih Kelas</option>
-                                                @foreach ($kelas as $kls)
+                                                @foreach ($kelasList as $kls)
                                                     <option value="{{ $kls->id }}" @if($bukuPelanggaran->kelas_id == $kls->id) selected @endif>{{ $kls->nama }}</option>
                                                 @endforeach
                                             </select>
@@ -79,7 +80,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label for="guru_id">Guru&nbsp;<span class="text-danger">*</span></label>
+                                            <label for="guru_id">Wali Kelas&nbsp;<span class="text-danger">*</span></label>
                                             <select class="form-select @error('guru_id') is-invalid @enderror" id="guru_id" name="guru_id">
                                                 <option value="" selected disabled>Pilih Guru</option>
                                                 @foreach ($gurus as $gu)
@@ -117,12 +118,13 @@
 </x-layout>
 
 <script>
+    // Fetch siswa berdasarkan kelas yang dipilih
     function fetchSiswa(kelasId) {
-        // Fetch siswa based on the selected kelas
+        let siswaSelect = document.getElementById('siswa_id');
+        siswaSelect.innerHTML = '<option value="">Loading...</option>';
         fetch(`/get-siswa/${kelasId}`)
             .then(response => response.json())
             .then(data => {
-                let siswaSelect = document.getElementById('siswa_id');
                 siswaSelect.innerHTML = '<option value="" selected disabled>Pilih Siswa</option>';
                 data.forEach(siswa => {
                     let option = document.createElement('option');
@@ -130,22 +132,29 @@
                     option.textContent = siswa.nama;
                     siswaSelect.appendChild(option);
                 });
+            })
+            .catch(error => {
+                siswaSelect.innerHTML = '<option value="">Error loading...</option>';
             });
     }
 
+    // Fetch pelanggaran berdasarkan tipe pelanggaran yang dipilih
     function fetchPelanggaran(tipePelanggaranId) {
-        // Fetch pelanggaran based on the selected tipe pelanggaran
+        let pelanggaranSelect = document.getElementById('pelanggaran_id');
+        pelanggaranSelect.innerHTML = '<option value="">Loading...</option>';
         fetch(`/get-pelanggaran/${tipePelanggaranId}`)
             .then(response => response.json())
             .then(data => {
-                let pelanggaranSelect = document.getElementById('pelanggaran_id');
                 pelanggaranSelect.innerHTML = '<option value="" selected disabled>Pilih Pelanggaran</option>';
                 data.forEach(pelanggaran => {
                     let option = document.createElement('option');
                     option.value = pelanggaran.id;
-                    option.textContent = pelanggaran.deskripsi; // Menggunakan deskripsi bukan nama
+                    option.textContent = pelanggaran.deskripsi;
                     pelanggaranSelect.appendChild(option);
                 });
+            })
+            .catch(error => {
+                pelanggaranSelect.innerHTML = '<option value="">Error loading...</option>';
             });
     }
 </script>

@@ -42,20 +42,22 @@ class DashboardController extends Controller
             return [$item['bulan'] => $item['jumlah']];
         });
 
-        // Menyiapkan array hasil dengan semua bulan
+        // Menyiapkan array hasil dengan semua bulan dalam urutan yang diinginkan
         $result = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $result[] = $data->get($i, 0);
+        $bulanUrut = [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+        foreach ($bulanUrut as $bulan) {
+            $result[] = $data->get($bulan, 0);
         }
 
         return response()->json($result);
     }
 
 
+
     public function getPelanggaranTerlambat()
     {
         $data = BukuPelanggaran::whereHas('pelanggaran', function ($query) {
-            $query->where('deskripsi', 'Terlambat datang ke sekolah');
+            $query->where('deskripsi', 'Terlambat masuk ke kelas tanpa alasan atau keterangan yang tidak dapat dipertanggungjawabkan.');
         })
         ->select(
             DB::raw('count(*) as jumlah'),
@@ -67,9 +69,11 @@ class DashboardController extends Controller
             return [$item['bulan'] => $item['jumlah']];
         });
 
+        // Menyiapkan array hasil dengan semua bulan dalam urutan yang diinginkan
         $result = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $result[] = $data->get($i, 0);
+        $bulanUrut = [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+        foreach ($bulanUrut as $bulan) {
+            $result[] = $data->get($bulan, 0);
         }
 
         return response()->json($result);
@@ -79,7 +83,7 @@ class DashboardController extends Controller
     public function getPelanggaranAlpa()
     {
         $data = BukuPelanggaran::whereHas('pelanggaran', function ($query) {
-            $query->where('deskripsi', 'Tidak menghadiri sekolah tanpa keterangan');
+            $query->where('deskripsi', 'Tidak hadir tanpa keterangan (Alpa).');
         })
         ->select(
             DB::raw('count(*) as jumlah'),
@@ -91,9 +95,11 @@ class DashboardController extends Controller
             return [$item['bulan'] => $item['jumlah']];
         });
 
+        // Menyiapkan array hasil dengan semua bulan dalam urutan yang diinginkan
         $result = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $result[] = $data->get($i, 0);
+        $bulanUrut = [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+        foreach ($bulanUrut as $bulan) {
+            $result[] = $data->get($bulan, 0);
         }
 
         return response()->json($result);

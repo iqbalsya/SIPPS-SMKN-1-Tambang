@@ -10,8 +10,10 @@ class Siswa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'nis', 'nisn', 'kelas_id', 'jurusan_id', 'gender_id', 'agama_id', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'nama_ayah', 'nama_ibu', 'telepon',
+        'nama', 'nis_nisn', 'kelas_id', 'jurusan_id', 'gender_id', 'agama_id', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'telepon', 'nama_ayah', 'nama_ibu', 'status_dalam_keluarga', 'anak_ke', 'alamat_orang_tua', 'telepon_orang_tua'
     ];
+
+    protected $with = ['kelas', 'jurusan', 'gender', 'agama'];
 
     public function kelas()
     {
@@ -49,6 +51,36 @@ class Siswa extends Model
     public function getTotalPoinAttribute()
     {
         return $this->bukuPelanggarans()->sum('buku_pelanggarans.poin');
+    }
+
+    public function getNamaAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getTempatLahirAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getNamaAyahAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getNamaIbuAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getAlamatAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getAlamatOrangTuaAttribute($value)
+    {
+        return ucwords(strtolower($value));
     }
 
 }

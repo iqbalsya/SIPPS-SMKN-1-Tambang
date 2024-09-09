@@ -31,11 +31,12 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|unique|max:255',
             'guru_id' => 'nullable|exists:gurus,id',
             'jurusan_id' => 'nullable|exists:jurusans,id',
         ], [
             'nama.required' => 'Nama kelas wajib diisi.',
+            'nama.unique' => 'Kelas ini sudah ada.',
             'guru_id.exists' => 'Guru yang dipilih tidak valid.',
             'jurusan_id.exists' => 'Jurusan yang dipilih tidak valid.',
         ]);
@@ -74,4 +75,18 @@ class KelasController extends Controller
         $kelas->delete();
         return redirect()->route('kelas.index')->with('success', 'Kelas telah dihapus');
     }
+
+    public function upgrade($id)
+    {
+        $kelas = Kelas::findOrFail($id);
+        $upgraded = $kelas->upgrade();
+    
+        if ($upgraded) {
+            return redirect()->route('kelas.index')->with('success', 'Kelas telah dinaikkan');
+        } else {
+            return redirect()->route('kelas.index')->with('error', 'Kelas tidak dapat dinaikkan. Pastikan tidak ada kelas dengan nama yang sama atau kelas sudah berada di tahun ajaran XII.');
+        }
+    }
+
+
 }

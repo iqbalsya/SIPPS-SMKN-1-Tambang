@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 255);
-            $table->string('nuptk', 255)->unique();
-            $table->string('nip', 255)->unique();
-            $table->string('posisi', 255);
+            $table->string('nip_nuptk', 255)->unique();
+            $table->string('pangkat_gol_jabatan', 255)->nullable();
+            $table->string('tugas_tambahan', 255)->nullable();
             $table->unsignedBigInteger('gender_id');
             $table->unsignedBigInteger('agama_id');
-            $table->string('tempat_lahir', 255);
-            $table->date('tanggal_lahir');
-            $table->string('alamat', 255);
-            $table->string('telepon', 255);
+            $table->string('tempat_lahir', 255)->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('alamat', 255)->nullable();
+            $table->string('telepon', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade')->onUpdate('cascade');

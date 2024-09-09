@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-Use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
@@ -17,68 +17,31 @@ class SessionsController extends Controller
         return view('sessions.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $attributes = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ], [
             'email.required' => 'Email wajib diisi.',
-            'password.required' => 'Password siswa wajib diisi.'
+            'password.required' => 'Password wajib diisi.'
         ]);
 
-        if (! auth()->attempt($attributes)) {
+        $user = User::where('email', $attributes['email'])->first();
+
+        if (! $user || ! Hash::check($attributes['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'email' => 'Email atau password yang kamu masukkan salah',
             ]);
         }
 
+        auth()->login($user);
+
         session()->regenerate();
 
         return redirect('/dashboard');
-
     }
 
-    public function show(){
-        request()->validate([
-            'email' => 'required|email',
-        ]);
-
-        $status = Password::sendResetLink(
-            request()->only('email')
-        );
-
-        return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
-
-    }
-
-    public function update(){
-
-        request()->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
-        ]);
-
-        $status = Password::reset(
-            request()->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => ($password)
-                ])->setRememberToken(Str::random(60));
-
-                $user->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
-    }
 
     public function destroy()
     {
@@ -86,5 +49,4 @@ class SessionsController extends Controller
 
         return redirect('/sign-in');
     }
-
 }

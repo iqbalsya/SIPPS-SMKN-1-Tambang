@@ -1,5 +1,9 @@
 @props(['activePage'])
 
+@php
+$user = auth()->user();
+@endphp
+
 <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
     id="sidenav-main">
@@ -17,25 +21,58 @@
 
     <hr class="horizontal light opacity-6 mt-0 mb-2">
         <ul class="navbar-nav">
+
+            @haspermission('mengakses halaman profile user')
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'user-profile' ? 'active bg-gradient-success' : '' }}" href="{{ route('user-profile') }}">
-                    <i class="material-icons opacity-10 pb-1" style="font-size: 1.8rem; margin-right: 8px;">account_circle</i>
-                    <span class="nav-link-text">User Profile</span>
+                    <i class="material-icons opacity-10 pb-1 ms-n2" style="font-size: 1.8rem; margin-right: 10px;">account_circle</i>
+                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->name }}</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman profile siswa')
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'profile-siswa' ? 'active bg-gradient-success' : '' }}" href="{{ route('siswa.profile') }}">
+                    <i class="material-icons opacity-10 pb-1 ms-n2" style="font-size: 1.8rem; margin-right: 10px;">account_circle</i>
+                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->name }}</span>
+                </a>
+            </li>
+            @endhaspermission
+
+            @haspermission('mengakses halaman profile guru')
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'profile-guru' ? 'active bg-gradient-success' : '' }}" href="{{ route('guru.profile') }}">
+                    <i class="material-icons opacity-10 pb-1 ms-n2" style="font-size: 1.8rem; margin-right: 10px;">account_circle</i>
+                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->name }}</span>
+                </a>
+            </li>
+            @endhaspermission
                 <hr class="flex-grow-1 border-white opacity-8 ms-3 me-3 mt-2 mb-2">
+
+            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'users' ? ' active bg-gradient-success' : '' }} "
+                    href="{{ route('users.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10 pb-1">manage_accounts</i>
+                    </div>
+                    <span class="nav-link-text ms-1">User Management</span>
+                </a>
+            </li>
+            @endrole
 
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10 pb-1">dashboard</i>
+                        <i class="material-icons opacity-10 pb-1">equalizer</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
 
+            @haspermission('mengakses halaman siswa')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'siswa' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('siswa.index') }}">
@@ -45,7 +82,9 @@
                     <span class="nav-link-text ms-1">Siswa</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman guru')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'guru' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('guru.index') }}">
@@ -55,7 +94,9 @@
                     <span class="nav-link-text ms-1">Guru</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman kelas')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'kelas' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('kelas.index') }}">
@@ -65,7 +106,9 @@
                     <span class="nav-link-text ms-1">Kelas</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman jurusan')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'jurusan' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('jurusan.index') }}">
@@ -75,7 +118,9 @@
                     <span class="nav-link-text ms-1">Jurusan</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman pelanggaran')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'pelanggaran' ? ' active bg-gradient-danger' : '' }} "
                     href="{{ route('pelanggaran.index') }}">
@@ -85,27 +130,45 @@
                     <span class="nav-link-text ms-1">Tata Tertib</span>
                 </a>
             </li>
+            @endhaspermission
 
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'tipe-pelanggaran' ? ' active bg-gradient-success' : '' }} "
-                    href="{{ route('tipe-pelanggaran.index') }}">
+            @haspermission('mengakses halaman lapor pelanggaran')
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'lapor-pelanggaran' ? ' active bg-gradient-success' : '' }} "
+                    href="{{ route('lapor-pelanggaran.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">groups</i>
+                        <i class="material-icons opacity-10 pb-1">menu_book</i>
                     </div>
-                    <span class="nav-link-text ms-1">Tipe Pelanggaran</span>
+                    <span class="nav-link-text ms-1">Lapor Pelanggaran</span>
                 </a>
-            </li> --}}
+            </li>
+            @endhaspermission
 
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'sanksi-pelanggaran' ? ' active bg-gradient-success' : '' }} "
-                    href="{{ route('sanksi-pelanggaran.index') }}">
+            @haspermission('mengakses halaman laporan pelanggaran')
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'laporan-pelanggaran-kelas' ? ' active bg-gradient-success' : '' }} "
+                    href="{{ route('laporan-pelanggaran.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">groups</i>
+                        <i class="material-icons opacity-10 pb-1">menu_book</i>
                     </div>
-                    <span class="nav-link-text ms-1">Sanksi Pelanggaran</span>
+                    <span class="nav-link-text ms-1">Laporan Pelanggaran</span>
                 </a>
-            </li> --}}
+            </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman buku pelanggaran kelas')
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'buku-pelanggaran-kelas' ? ' active bg-gradient-success' : '' }} "
+                    href="{{ route('buku-pelanggaran-kelas.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10 pb-1">menu_book</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Buku Pelanggaran Kelas</span>
+                </a>
+            </li>
+            @endhaspermission
+
+            @haspermission('mengakses halaman buku pelanggaran')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'buku-pelanggaran' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('buku-pelanggaran.index') }}">
@@ -115,68 +178,19 @@
                     <span class="nav-link-text ms-1">Buku Pelanggaran</span>
                 </a>
             </li>
+            @endhaspermission
 
+            @haspermission('mengakses halaman lapor keterlambatan')
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'lapor-keterlambatan' ? ' active bg-gradient-success' : '' }} "
                     href="{{ route('lapor-keterlambatan.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10 pb-1">assignment_late</i>
                     </div>
-                    <span class="nav-link-text ms-1">Lapor Keterlambatan</span>
+                    <span class="nav-link-text ms-1">Catat Keterlambatan</span>
                 </a>
             </li>
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'billing' ? ' active bg-gradient-success' : '' }}  "
-                    href="{{ route('billing') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'notifications' ? ' active bg-gradient-success' : '' }}  "
-                    href="{{ route('notifications') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li> --}}
-
-            {{-- <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('profile') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('static-sign-in') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">login</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('static-sign-up') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li> --}}
+            @endhaspermission
 
         </ul>
     </div>

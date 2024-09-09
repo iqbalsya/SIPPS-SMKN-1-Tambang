@@ -21,11 +21,13 @@ class BukuPelanggaran extends Pivot
         'alasan',
     ];
 
+    protected $with = ['siswa', 'tipePelanggaran', 'pelanggaran', 'guru', 'kelas'];
+
     public function siswa()
     {
         return $this->belongsTo(Siswa::class);
     }
-
+    
     public function tipePelanggaran()
     {
         return $this->belongsTo(TipePelanggaran::class, 'tipe_pelanggaran_id');
@@ -41,8 +43,20 @@ class BukuPelanggaran extends Pivot
         return $this->belongsTo(Guru::class, 'guru_id');
     }
 
-     public function getFormattedTanggalAttribute()
+    public function kelas()
     {
-        return Carbon::parse($this->hari_tanggal)->locale('id')->translatedFormat('l, d F Y');
+        return $this->belongsTo(Kelas::class);
     }
+
+    public function getHariAttribute()
+    {
+        return Carbon::parse($this->hari_tanggal)->locale('id')->translatedFormat('l');
+    }
+
+    public function getFormattedTanggalAttribute()
+    {
+        return Carbon::parse($this->hari_tanggal)->format('Y-m-d');
+    }
+
+
 }

@@ -1,17 +1,13 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.sidebar activePage="buku-pelanggaran"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-        <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Buku Pelanggaran"></x-navbars.navs.auth>
-        <!-- End Navbar -->
         <div class="container-fluid">
             <meta name="csrf-token" content="{{ csrf_token() }}">
             @if(session('success'))
                 <div class="alert alert-light alert-dismissible text-dark fade show" role="alert">
                     <span class="alert-icon align-middle">
-                        <span class="material-icons text-md">
-                            thumb_up
-                        </span>
+                        <span class="material-icons text-md">thumb_up</span>
                     </span>
                     <strong>&nbsp;Berhasil&nbsp;-&nbsp;</strong>{{ session('success') }}
                     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
@@ -29,50 +25,102 @@
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
-                            <div class="my-3 text-end">
-                                <a class="btn bg-gradient-success mb-0" href="{{ route('buku-pelanggaran.create') }}">
-                                    <i class="material-icons text-xl">add</i>&nbsp;Catat Pelanggaran
-                                </a>
+
+                            <div class="d-flex mt-4 mb-1">
+                                <div class="col-md-2 me-3">
+                                    <input type="date" id="start-date" class="form-control" placeholder="Tanggal Awal">
+                                </div>
+                                <div class="col-md-2 me-2">
+                                    <input type="date" id="end-date" class="form-control" placeholder="Tanggal Akhir">
+                                </div>
+                                <div class="me-2">
+                                    <button id="filter-tanggal" class="btn btn-success">Filter</button>
+                                </div>
+                                <div>
+                                    <button id="reset" class="btn btn-secondary">Reset</button>
+                                </div>
                             </div>
+
+                            <div class="d-flex justify-content-between mt-1 mb-1">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <select id="kelas-filter" class="form-control">
+                                            <option value="">Semua Kelas</option>
+                                            @foreach($kelasList as $kelas)
+                                                <option value="{{ $kelas->nama }}">{{ $kelas->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <button id="filter-kelas" class="btn btn-success">Pilih</button>
+                                    </div>
+                                </div>
+
+                                @haspermission('mengelola buku pelanggaran')
+                                    <div>
+                                        <a class="btn bg-gradient-success mb-0" href="{{ route('buku-pelanggaran.create') }}">
+                                            <i class="material-icons text-xl">add</i>&nbsp;Catat Pelanggaran
+                                        </a>
+                                    </div>
+                                @endhaspermission
+                            </div>
+
                             <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
-                                        <th class="text-center">Siswa</th>
-                                        {{-- <th class="text-center">Tipe Pelanggaran</th> --}}
-                                        <th class="text-center">Pelanggaran</th>
-                                        {{-- <th class="text-center" width="150px">Guru Pelapor</th> --}}
+                                        <th class="text-center" width="120px">Siswa</th>
+                                        <th class="text-center" width="20px">Kelas</th>
+                                        <th class="text-center" width="300px">Pelanggaran</th>
                                         <th class="text-center" width="10px">Poin</th>
-                                        <th class="text-center" width="160px">Hari & Tanggal</th>
-                                        <th class="text-center" width="10px">Action</th>
+                                        <th class="text-center" width="50px">Hari, Tanggal</th>
+                                        @haspermission('mengelola buku pelanggaran')
+                                            <th class="text-center" width="80px">Aksi</th>
+                                        @endhaspermission
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($bukuPelanggarans as $bukuPelanggaran)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->siswa->nama }}</td>
-                                        {{-- <td>{{ $bukuPelanggaran->tipePelanggaran->nama }}</td> --}}
-                                        <td class="ps-3">{{ $bukuPelanggaran->pelanggaran->deskripsi }}</td>
-                                        {{-- <td>{{ $bukuPelanggaran->guru->nama }}</td> --}}
-                                        <td class="text-center">{{ $bukuPelanggaran->poin }}</td>
-                                        <td class="ps-3">{{ $bukuPelanggaran->formatted_tanggal }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('buku-pelanggaran.edit', $bukuPelanggaran->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                            <form action="{{ route('buku-pelanggaran.destroy', $bukuPelanggaran->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </form>
-                                        </td>
+
+                                        <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $bukuPelanggaran->siswa->nama }}</td>
+
+                                        <td class="ps-2" style="word-wrap: break-word; word-break: break-all; white-space: normal;">{{ $bukuPelanggaran->siswa->kelas->nama }}</td>
+
+                                        <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $bukuPelanggaran->pelanggaran->deskripsi }}</td>
+
+                                        <td class="text-center" style="word-wrap: break-word; word-break: break-all; white-space: normal;">{{ $bukuPelanggaran->poin }}</td>
+
+                                        <td class="ps-2">
+                                            {{ $bukuPelanggaran->hari }}, {{ $bukuPelanggaran->formatted_tanggal }}
+                                        </td>                                        
+                                        
+                                        @haspermission('mengelola buku pelanggaran')
+                                            <td class="text-center">
+                                                <a href="{{ route('buku-pelanggaran.show', $bukuPelanggaran->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2">
+                                                    <i class="material-icons">visibility</i>
+                                                </a>
+
+                                                <a href="{{ route('buku-pelanggaran.edit', $bukuPelanggaran->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+
+                                                <form action="{{ route('buku-pelanggaran.destroy', $bukuPelanggaran->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        @endhaspermission
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                 </div>
@@ -80,16 +128,90 @@
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $('.data-table').DataTable({
+                    var table = $('.data-table').DataTable({
                         language: {
                             search: "Cari:",
                             lengthMenu: "Tampilkan _MENU_ data buku pelanggaran",
                             info: "Menampilkan _START_ - _END_ dari _TOTAL_ pelanggaran",
+                            infoFiltered: "(difilter dari _MAX_ total pelanggaran)",
                             paginate: {
                                 previous: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_left</i>',
                                 next: '<i class="material-icons opacity-10 fs-4">keyboard_double_arrow_right</i>'
                             }
+                        },
+                        dom: '<"top"lBf>rt<"bottom"ip><"clear">',
+                        buttons: [
+                            {
+                                extend: 'excel',
+                                text: '',
+                                className: 'btn-md btn-success fa fa-file-excel fa mb-0',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5] // Kolom yang diexport (indeks mulai dari 0)
+                                }
+                            },
+                            // {
+                            //     extend: 'pdf',
+                            //     text: '',
+                            //     className: 'btn-md btn-success fa fa-file-excel fa mb-0',
+                            //     exportOptions: {
+                            //         columns: [1, 2, 3, 4, 5] // Kolom yang diexport (indeks mulai dari 0)
+                            //     }
+                            // },
+                            {
+                                extend: 'print',
+                                text: '',
+                                className: 'btn-md btn-success fa fa-print fa mb-0',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5] // Kolom yang diexport (indeks mulai dari 0)
+                                }
+                            }
+                        ]
+                    });
+
+                    function filterTable() {
+                        var startDate = $('#start-date').val();
+                        var endDate = $('#end-date').val();
+                        var kelas = $('#kelas-filter').val();
+
+                        $.fn.dataTable.ext.search = [];
+
+                        if (startDate && endDate) {
+                            var start = new Date(startDate);
+                            var end = new Date(endDate);
+                            $.fn.dataTable.ext.search.push(
+                                function(settings, data, dataIndex) {
+                                    var date = new Date(data[5].split(', ')[1]); // kolom tanggal
+                                    return date >= start && date <= end;
+                                }
+                            );
                         }
+
+                        if (kelas) {
+                            $.fn.dataTable.ext.search.push(
+                                function(settings, data, dataIndex) {
+                                    var kelasData = data[2]; // kolom kelas
+                                    return kelasData === kelas;
+                                }
+                            );
+                        }
+
+                        table.draw();
+                    }
+
+                    $('#filter-tanggal').on('click', function() {
+                        filterTable();
+                    });
+
+                    $('#filter-kelas').on('click', function() {
+                        filterTable();
+                    });
+
+                    $('#reset').on('click', function() {
+                        $('#start-date').val('');
+                        $('#end-date').val('');
+                        $('#kelas-filter').val('');
+                        $.fn.dataTable.ext.search = [];
+                        table.draw();
                     });
 
                     setTimeout(function() {
@@ -100,9 +222,23 @@
                 });
 
                 function confirmDelete() {
-                    return confirm('Apakah Anda yakin ingin menghapus buku pelanggaran ini?');
+                    return confirm('Apakah Anda yakin ingin menghapus pelanggaran ini?');
                 }
             </script>
+
+            <style>
+                .top .dt-buttons {
+                    display: inline-block;
+                }
+                .top .dataTables_filter {
+                    float: right;
+                }
+                .top .dataTables_length {
+                    display: inline-block;
+                    margin-right: 16px;
+                }
+            </style>
+
         </div>
     </main>
 </x-layout>

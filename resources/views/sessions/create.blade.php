@@ -1,19 +1,18 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <x-layout bodyClass="bg-gray-200">
     <div class="container position-sticky z-index-sticky top-0">
     </div>
     <main class="main-content mt-0">
         <div class="page-header align-items-start min-vh-100"
-            style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
+            style="background-image:url('assets/img/bg_smk.jpg');">
+            <span class="mask bg-gradient-dark opacity-5"></span>
             <div class="container mt-4">
                 <div class="row signin-margin">
                     <div class="col-lg-4 col-md-8 col-12 mx-auto mt-6">
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-2">Sign in</h4>
+                                <div class="bg-gradient-success shadow-success border-radius-xl py-3 pe-1">
+                                    <h4 class="text-white font-weight-bold fs-3 text-center mt-0 mb-n1">SIPPS</h4>
+                                    <h4 class="text-white font-weight-normal fs-5 text-center mb-0">SMKN 1 Tambang</h4>
                                 </div>
                             </div>
                             <div class="card-body mt-4">
@@ -29,7 +28,7 @@
                                     </div>
                                     @endif
 
-                                    <div class="form-group mb-3 ms-n3">
+                                    <div class="form-group mb-3 mt-n3 ms-n3">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                                         @error('email')
@@ -51,7 +50,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn bg-gradient-success w-100 my-4 mt-5 mb-n3">Sign in</button>
+                                        <button type="submit" class="btn bg-gradient-success w-100 my-4 mt-3 mb-2">Masuk</button>
                                     </div>
 
                                 </form>

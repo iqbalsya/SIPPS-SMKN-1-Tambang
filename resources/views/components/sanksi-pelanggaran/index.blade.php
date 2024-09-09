@@ -73,7 +73,7 @@
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center">Sanksi Pelanggaran</th>
                                         <th class="text-center" width="100px">Akumulasi Poin</th>
-                                        <th class="text-center" width="100px">Action</th>
+                                        <th class="text-center" width="100px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

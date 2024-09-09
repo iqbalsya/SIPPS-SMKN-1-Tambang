@@ -24,38 +24,44 @@
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
+
                             <div class=" my-3 text-end">
-                                <a class="btn bg-gradient-success mb-0 px-3" href="{{ route('jurusan.create') }}">
-                                    <i class="material-icons text-xl">add</i>&nbsp;Tambah Jurusan
-                                </a>
+                                @haspermission('mengelola jurusan')
+                                    <a class="btn bg-gradient-success mb-0 px-3" href="{{ route('jurusan.create') }}">
+                                        <i class="material-icons text-xl">add</i>&nbsp;Tambah Jurusan
+                                    </a>
+                                @endhaspermission
                             </div>
-                            <table class="table table-striped table-bordered data-table text-center mb-3">
+
+                            <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th width="16px">No</th>
-                                        <th width="220px">Nama</th>
-                                        <th>Ketua Jurusan</th>
-                                        <th width="50px">Jumlah Siswa</th>
-                                        <th width="120px">Action</th>
+                                        <th class="text-center" width="16px">No</th>
+                                        <th class="text-center" width="220px">Nama</th>
+                                        <th class="text-center">Ketua Jurusan</th>
+                                        <th class="text-center" width="50px">Jumlah Siswa</th>
+                                        <th class="text-center" width="50px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($jurusans as $jurusan)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $jurusan->nama }}</td>
-                                        <td>{{ $jurusan->guru->nama }}</td>
-                                        <td>{{ $jurusan->jumlah_siswa }}</td>
-                                        <td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="ps-3">{{ $jurusan->nama }}</td>
+                                        <td class="ps-3">{{ $jurusan->guru->nama }}</td>
+                                        <td class="text-center">{{ $jurusan->jumlah_siswa }}</td>
+                                        <td class="text-center">
                                             <a href="{{ route('jurusan.show', $jurusan->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
-                                            <a href="{{ route('jurusan.edit', $jurusan->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                            @haspermission('mengelola jurusan')
+                                                <a href="{{ route('jurusan.edit', $jurusan->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('jurusan.destroy', $jurusan->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jurusan ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
-                                            </form>
+                                                <form action="{{ route('jurusan.destroy', $jurusan->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jurusan ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
+                                                </form>
+                                            @endhaspermission
                                         </td>
                                     </tr>
                                     @endforeach

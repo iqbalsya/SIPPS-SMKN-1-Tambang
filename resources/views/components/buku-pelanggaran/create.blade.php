@@ -19,6 +19,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <!-- If the class and student are already available -->
                                         @if ($siswa)
                                             <div class="form-group mb-3">
                                                 <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
@@ -39,14 +40,30 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
+
+                                            <!-- Automatically fetch the wali kelas -->
+                                            <div class="form-group mb-3">
+                                                <label for="guru_id">Wali Kelas&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('guru_id') is-invalid @enderror" id="guru_id" name="guru_id" readonly>
+                                                    <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                                                </select>
+                                                @error('guru_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                         @else
+                                            <!-- Pre-fill the class based on logged-in teacher -->
                                             <div class="form-group mb-3">
                                                 <label for="kelas_id">Kelas&nbsp;<span class="text-danger">*</span></label>
-                                                <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" onchange="fetchSiswa(this.value)">
-                                                    <option value="" selected disabled>Pilih Kelas</option>
-                                                    @foreach ($kelas as $kelas)
+                                                <select class="form-select @error('kelas_id') is-invalid @enderror" id="kelas_id" name="kelas_id" {{ $kelas ? 'readonly' : '' }}>
+                                                    @if($kelas)
                                                         <option value="{{ $kelas->id }}">{{ $kelas->nama }}</option>
-                                                    @endforeach
+                                                    @else
+                                                        <option value="" selected disabled>Pilih Kelas</option>
+                                                        @foreach ($allKelas as $kls)
+                                                            <option value="{{ $kls->id }}">{{ $kls->nama }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 @error('kelas_id')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -61,11 +78,24 @@
                                                 @error('siswa_id')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
+                                            </div>                                            
+
+                                            <div class="form-group mb-3">
+                                                <label for="guru_id">Wali Kelas&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="form-select @error('guru_id') is-invalid @enderror" id="guru_id" name="guru_id" readonly>
+                                                    @if($guru)
+                                                        <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                                                    @endif
+                                                </select>
+                                                @error('guru_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         @endif
                                     </div>
 
                                     <div class="col-md-6">
+                                        <!-- Tipe Pelanggaran and Pelanggaran Section -->
                                         <div class="form-group mb-3">
                                             <label for="tipe_pelanggaran_id">Tipe Pelanggaran&nbsp;<span class="text-danger">*</span></label>
                                             <select class="form-select @error('tipe_pelanggaran_id') is-invalid @enderror" id="tipe_pelanggaran_id" name="tipe_pelanggaran_id" onchange="fetchPelanggaran(this.value)">
@@ -94,21 +124,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label for="guru_id">Guru&nbsp;<span class="text-danger">*</span></label>
-                                            <select class="form-select @error('guru_id') is-invalid @enderror" id="guru_id" name="guru_id">
-                                                <option value="" selected disabled>Pilih Guru</option>
-                                                @foreach ($gurus as $guru)
-                                                    <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('guru_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
                                             <label for="hari_tanggal">Hari dan Tanggal&nbsp;<span class="text-danger">*</span></label>
                                             <input type="date" class="form-control @error('hari_tanggal') is-invalid @enderror" id="hari_tanggal" name="hari_tanggal" value="{{ old('hari_tanggal') }}">
                                             @error('hari_tanggal')
@@ -131,9 +146,14 @@
     </main>
 </x-layout>
 
+
 <script>
+    if (document.getElementById('kelas_id').value) {
+        fetchSiswa(document.getElementById('kelas_id').value);
+        fetchGuru(document.getElementById('kelas_id').value);
+    }
+
     function fetchSiswa(kelasId) {
-        // Fetch siswa based on the selected kelas
         fetch(`/get-siswa/${kelasId}`)
             .then(response => response.json())
             .then(data => {
@@ -148,8 +168,32 @@
             });
     }
 
+    function fetchGuru(kelasId) {
+        fetch(`/get-guru/${kelasId}`)
+            .then(response => response.json())
+            .then(data => {
+                let guruSelect = document.getElementById('guru_id');
+                guruSelect.innerHTML = '<option value="" selected disabled>Pilih Guru</option>';
+                if (data) {
+                    let option = document.createElement('option');
+                    option.value = data.guru_id;
+                    option.textContent = data.guru_nama;
+                    guruSelect.appendChild(option);
+                    guruSelect.value = data.guru_id; 
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching guru:', error);
+            });
+    }
+
+    document.getElementById('kelas_id').addEventListener('change', function() {
+        const kelasId = this.value;
+        fetchSiswa(kelasId);
+        fetchGuru(kelasId); 
+    });
+
     function fetchPelanggaran(tipePelanggaranId) {
-        // Fetch pelanggaran based on the selected tipe pelanggaran
         fetch(`/get-pelanggaran/${tipePelanggaranId}`)
             .then(response => response.json())
             .then(data => {
@@ -158,7 +202,7 @@
                 data.forEach(pelanggaran => {
                     let option = document.createElement('option');
                     option.value = pelanggaran.id;
-                    option.textContent = pelanggaran.deskripsi; // Menggunakan deskripsi bukan nama
+                    option.textContent = pelanggaran.deskripsi;
                     pelanggaranSelect.appendChild(option);
                 });
             });

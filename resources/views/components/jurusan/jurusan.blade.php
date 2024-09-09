@@ -29,8 +29,8 @@
                         <div class="container pt-4 mb-3">
                             <div class="mb-4">
                                 <span class="badge bg-gradient-info px-4 py-3 fs-7">Jumlah Siswa : {{ $jurusan->jumlah_siswa }}</span>
-                                <span class="badge bg-gradient-info px-4 py-3 mx-3 fs-7">Jumlah Siswa laki-laki : {{ $jurusan->jumlah_siswa_laki_laki }}</span>
-                                <span class="badge bg-gradient-info px-4 py-3 fs-7">Jumlah Siswa Perempuan : {{ $jurusan->jumlah_siswa_perempuan }}</span>
+                                <span class="badge bg-gradient-info px-4 py-3 mx-3 fs-7">Siswa laki-laki : {{ $jurusan->jumlah_siswa_laki_laki }}</span>
+                                <span class="badge bg-gradient-info px-4 py-3 fs-7">Siswa Perempuan : {{ $jurusan->jumlah_siswa_perempuan }}</span>
                             </div>
                             <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
@@ -40,27 +40,29 @@
                                         <th class="text-center" width="50px">Kelas</th>
                                         <th class="text-center" width="100px">Gender</th>
                                         <th class="text-center" width="16px">Total Poin</th>
-                                        <th class="text-center" width="120px">Action</th>
+                                        <th class="text-center" width="60px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($jurusan->siswa as $siswa)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="ps-4">{{ $siswa->nama }}</td>
-                                        <td class="text-center">{{ $siswa->kelas->nama }}</td>
-                                        <td class="text-center">{{ $siswa->gender->jenis }}</td>
+                                        <td class="ps-3">{{ $siswa->nama }}</td>
+                                        <td class="ps-3">{{ $siswa->kelas->nama }}</td>
+                                        <td class="ps-3">{{ $siswa->gender->jenis }}</td>
                                         <td class="text-center">{{ $siswa->total_poin }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('siswa.show', $siswa->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
-                                            <a href="{{ route('siswa.edit', $siswa->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                            @haspermission('mengelola jurusan')
+                                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
-                                            </form>
+                                                <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</i></button>
+                                                </form>
+                                            @endhaspermission
                                         </td>
                                     </tr>
                                     @endforeach

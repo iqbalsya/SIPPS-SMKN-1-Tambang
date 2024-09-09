@@ -15,6 +15,8 @@ class Jurusan extends Model
         'nama', 'guru_id',
     ];
 
+    protected $with = ['guru'];
+
     public function siswa()
     {
         return $this->hasMany(Siswa::class);

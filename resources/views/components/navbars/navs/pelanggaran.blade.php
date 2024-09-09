@@ -30,7 +30,7 @@
             <li class="nav-item">
                 <a class="nav-link mb-0 px-4 py-1 {{ $activePage == 'pelanggaran' ? 'active bg-danger text-white' : '' }}" href="{{ route('pelanggaran.index') }}">
                     <i class="material-icons text-lg position-relative">menu</i>
-                    <span class="ms-1">List Pelanggaran</span>
+                    <span class="ms-1">Bentuk Pelanggaran</span>
                 </a>
             </li>
         </ul>
@@ -44,13 +44,13 @@
             </li>
         </ul>
 
-        <ul class="nav nav-pills nav-fill" role="tablist">
+        {{-- <ul class="nav nav-pills nav-fill" role="tablist">
             <li class="nav-item">
                 <a class="nav-link mb-0 px-4 py-1 {{ $activePage == 'sanksi-pelanggaran' ? 'active bg-danger text-white' : '' }}" href="{{ route('sanksi-pelanggaran.index') }}">
                     <i class="material-icons text-lg position-relative">gavel</i>
                     <span class="ms-1">Sanksi Pelanggaran</span>
                 </a>
             </li>
-        </ul>
+        </ul> --}}
     </ul>
 </div>

@@ -14,7 +14,7 @@ class JurusansTableSeeder extends Seeder
     public function run(): void
     {
         Jurusan::create([
-            'nama' => 'Teknik Kendaraan Ringan',
+            'nama' => 'Teknik Kendaraan Ringan Otomotif',
             'guru_id' => 1,
         ]);
 
@@ -29,7 +29,7 @@ class JurusansTableSeeder extends Seeder
         ]);
 
         Jurusan::create([
-            'nama' => 'OTK Perkantoran',
+            'nama' => 'Manajemen Perkantoran dan Layanan Bisnis',
             'guru_id' => 2,
         ]);
     }

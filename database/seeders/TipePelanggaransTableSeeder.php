@@ -13,10 +13,9 @@ class TipePelanggaransTableSeeder extends Seeder
      */
     public function run(): void
     {
-        TipePelanggaran::create(['nama' => 'Kebersihan']);
-        TipePelanggaran::create(['nama' => 'Kerajinan']);
-        TipePelanggaran::create(['nama' => 'Kerapian']);
-        TipePelanggaran::create(['nama' => 'Sikap dan Tingkah Laku']);
-        TipePelanggaran::create(['nama' => 'Kehutanan']);
+        TipePelanggaran::create(['nama' => 'Ringan']);
+        TipePelanggaran::create(['nama' => 'Sedang']);
+        TipePelanggaran::create(['nama' => 'Berat']);
+        TipePelanggaran::create(['nama' => 'Sangat Berat']);
     }
 }

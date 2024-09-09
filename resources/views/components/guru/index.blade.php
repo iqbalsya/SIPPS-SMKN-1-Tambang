@@ -27,38 +27,46 @@
                             </div>
                         </div>
                         <div class="container mt-2 mb-3">
+
                             <div class=" my-3 text-end">
-                                <a class="btn bg-gradient-success mb-0 px-4" href="{{ route('guru.create') }}">
-                                    <i class="material-icons text-xl">add</i>&nbsp;Tambah Guru
-                                </a>
+                                @haspermission('mengelola guru')
+                                    <a class="btn bg-gradient-success mb-0 px-4" href="{{ route('guru.create') }}">
+                                        <i class="material-icons text-xl">add</i>&nbsp;Tambah Guru
+                                    </a>
+                                @endhaspermission
                             </div>
-                            <table class="table table-striped table-bordered data-table text-center mb-3">
+
+                            <table class="table table-striped table-bordered data-table mb-3">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th width="16px">No</th>
-                                        <th>Nama</th>
-                                        <th width="120px">Posisi</th>
-                                        <th width="96px">Gender</th>
-                                        <th width="104px">Action</th>
+                                        <th class="text-center" width="16px">No</th>
+                                        <th class="text-center" width="150px">NIP/NUPTK</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center" width="150px">Pangkat/Gol. Jabatan</th>
+                                        <th class="text-center" width="100px">Gender</th>
+                                        <th class="text-center" width="50px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($guru as $g)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $g->nama }}</td>
-                                        <td>{{ $g->posisi }}</td>
-                                        <td>{{ $g->gender->jenis }}</td>
-                                        <td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="ps-2">{{ $g->nip_nuptk }}</td>
+                                        <td class="ps-2">{{ $g->nama }}</td>
+                                        <td class="ps-2">{{ $g->pangkat_gol_jabatan }}</td>
+                                        <td class="ps-2">{{ $g->gender->jenis }}</td>
+                                        <td class="text-center">
                                             <a href="{{ route('guru.show', $g->id)}}" class="edit btn btn-info btn-link btn-md m-0 p-2"><i class="material-icons">visibility</i></a>
 
-                                            <a href="{{ route('guru.edit', $g->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
+                                            @haspermission('mengelola guru')
+                                                <a href="{{ route('guru.edit', $g->id) }}" class="edit btn btn-warning btn-link btn-md m-0 p-2"><i class="material-icons">edit</i></a>
 
-                                            <form action="{{ route('guru.destroy', $g->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
-                                            </form>
+                                                <form action="{{ route('guru.destroy', $g->id) }}" method="POST" style="display: inline;" onsubmit="return confirmDelete()">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="edit btn btn-danger btn-link btn-md m-0 p-2"><i class="material-icons">delete</button>
+                                                </form>
+                                            @endhaspermission
                                         </td>
                                     </tr>
                                     @endforeach

@@ -17,7 +17,7 @@ class LaporKeterlambatanController extends Controller
     public function index()
     {
         $pelanggaranTerlambat = BukuPelanggaran::whereHas('pelanggaran', function ($query) {
-            $query->where('deskripsi', 'Terlambat datang ke sekolah');
+            $query->where('deskripsi', 'Terlambat masuk ke kelas tanpa alasan atau keterangan yang tidak dapat dipertanggungjawabkan.');
         })
         ->orderBy('hari_tanggal', 'desc')
         ->with(['siswa.kelas', 'siswa.gender', 'guru'])
@@ -26,9 +26,15 @@ class LaporKeterlambatanController extends Controller
         return view('components.lapor-keterlambatan.index', compact('pelanggaranTerlambat'));
     }
 
+    public function show($id)
+    {
+        $laporan = BukuPelanggaran::with('siswa.kelas', 'siswa.gender', 'guru')->findOrFail($id);
+        return view('components.lapor-keterlambatan.show', compact('laporan'));
+    }
+
     public function create()
     {
-        $pelanggaran = Pelanggaran::where('deskripsi', 'Terlambat Datang ke Sekolah')->first();
+        $pelanggaran = Pelanggaran::where('deskripsi', 'Terlambat masuk ke kelas tanpa alasan atau keterangan yang tidak dapat dipertanggungjawabkan.')->first();
         $tipePelanggaran = $pelanggaran->tipePelanggaran;
         $gurus = Guru::all();
         $kelas = Kelas::all();
@@ -44,6 +50,12 @@ class LaporKeterlambatanController extends Controller
             'guru_id' => 'required',
             'hari_tanggal' => 'required',
             'alasan' => 'required',
+        ], [
+            'siswa_id.required' => 'Siswa wajib diisi.',
+            'kelas_id.required' => 'Kelas wajib diisi.',
+            'guru_id.required' => 'Guru piket wajib diisi.',
+            'hari_tanggal.required' => 'Hari dan tanggal wajib diisi.',
+            'alasan.required' => 'Alasan wajib diisi.',
         ]);
 
         $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);

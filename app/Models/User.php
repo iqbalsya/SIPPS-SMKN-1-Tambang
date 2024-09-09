@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -22,21 +23,25 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'location',
-        'phone',
-        'about',
-        'password_confirmation'
+        'password_confirmation',
+        'siswa_id',
+        'guru_id',
     ];
 
-     public function students()
+    public function siswa()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->belongsTo(Siswa::class);
     }
 
-    public function teachers()
+    public function guru()
     {
-        return $this->hasMany(Guru::class);
+        return $this->belongsTo(Guru::class);
     }
+
+    // public function guru()
+    // {
+    //     return $this->hasOne(Guru::class);
+    // }
 
     /**
      * The attributes that should be hidden for serialization.

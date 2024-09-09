@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SiswasTableSeeder::class,
             TipePelanggaransTableSeeder::class,
             PelanggaransTableSeeder::class,
+            RolePermissionSeeder::class,
         ]);
     }
 }
