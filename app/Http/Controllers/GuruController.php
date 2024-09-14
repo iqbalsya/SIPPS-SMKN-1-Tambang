@@ -7,6 +7,7 @@ use App\Models\Gender;
 use App\Models\Agama;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
@@ -36,6 +37,60 @@ class GuruController extends Controller
         return view('components.guru-profile.profile', compact('guru', 'totalPelanggaran'));
     }
 
+    public function profileEdit(Guru $guru)
+    {
+        $user = Auth::user();
+        $guru = Guru::where('id', $user->guru_id)->firstOrFail();
+
+        $genders = Gender::all();
+        $agamas = Agama::all();
+        return view('components.guru-profile.edit', compact('guru', 'genders', 'agamas'));
+    }
+
+    public function ProfileUpdate(Request $request, Guru $guru)
+    {
+        $user = Auth::user();
+        $guru = Guru::where('id', $user->guru_id)->firstOrFail();
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'nip_nuptk' => 'required|string|max:255|unique:gurus,nip_nuptk,' . $guru->id,
+            'pangkat_gol_jabatan' => 'nullable|string|max:255',
+            'tugas_tambahan' => 'nullable|string|max:255',
+            'gender_id' => 'required|exists:genders,id',
+            'agama_id' => 'required|exists:agamas,id',
+            'tempat_lahir' => 'nullable|string|max:255',
+            'tanggal_lahir' => 'nullable|date',
+            'alamat' => 'nullable|string|max:255',
+            'telepon' => 'nullable|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        ], [
+            'nama.required' => 'Nama guru wajib diisi.',
+            'nip_nuptk.required' => 'NIP/NUPTK guru wajib diisi.',
+            'nip_nuptk.unique' => 'NIP/NUPTK sudah ada.',
+            'gender_id.required' => 'Gender guru wajib diisi.',
+            'gender_id.exists' => 'Gender guru tidak valid.',
+            'agama_id.required' => 'Agama guru wajib diisi.',
+            'agama_id.exists' => 'Agama guru tidak valid.',
+            'foto.image' => 'Foto harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat jpg, png, atau jpeg.',
+            'foto.max' => 'Ukuran foto maksimal 2MB.',
+        ]);
+
+        // Upload atau update foto
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($guru->foto) {
+                Storage::disk('public')->delete($guru->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('fotoguru', 'public');
+        }
+
+        $guru->update($validated);
+
+        return redirect()->route('guru.profile')->with('success', 'Guru telah diperbarui');
+    }
+
 
     public function create()
     {
@@ -59,6 +114,7 @@ class GuruController extends Controller
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'nullable|string|max:255',
             'telepon' => 'nullable|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', 
         ], [
             'nama.required' => 'Nama guru wajib diisi.',
             'nip_nuptk.required' => 'NIP/NUPTK guru wajib diisi.',
@@ -67,7 +123,14 @@ class GuruController extends Controller
             'gender_id.exists' => 'Gender guru tidak valid.',
             'agama_id.required' => 'Agama guru wajib diisi.',
             'agama_id.exists' => 'Agama guru tidak valid.',
+            'foto.image' => 'Foto harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat jpg, png, atau jpeg.',
+            'foto.max' => 'Ukuran foto maksimal 2MB.',
         ]);
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('fotoguru', 'public');
+        }
 
         Guru::create($validated);
 
@@ -94,6 +157,7 @@ class GuruController extends Controller
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'nullable|string|max:255',
             'telepon' => 'nullable|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ], [
             'nama.required' => 'Nama guru wajib diisi.',
             'nip_nuptk.required' => 'NIP/NUPTK guru wajib diisi.',
@@ -102,7 +166,19 @@ class GuruController extends Controller
             'gender_id.exists' => 'Gender guru tidak valid.',
             'agama_id.required' => 'Agama guru wajib diisi.',
             'agama_id.exists' => 'Agama guru tidak valid.',
+            'foto.image' => 'Foto harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat jpg, png, atau jpeg.',
+            'foto.max' => 'Ukuran foto maksimal 2MB.',
         ]);
+
+        // Upload atau update foto
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($guru->foto) {
+                Storage::disk('public')->delete($guru->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('fotoguru', 'public');
+        }
 
         $guru->update($validated);
 

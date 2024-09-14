@@ -15,21 +15,26 @@
                         </div>
                         <div class="container mt-4 mb-4">
                             <div class="row d-flex justify-content-between mt-2">
-                                <!-- Profile Illustration and Details -->
                                 <div class="col-md-4">
                                     <div class="card text-center border-success shadow-lg p-3 bg-body rounded h-100 d-flex flex-column">
                                         <div class="px-3 pt-3">
-                                            <!-- Ganti gambar sesuai dengan jenis kelamin -->
-                                            @if($guru->gender->jenis == 'Laki laki')
-                                                <img src="{{ asset('assets/img/guru_male.jpg') }}"
+                                            @if ($guru->foto)
+                                                <img src="{{ asset('storage/' . $guru->foto) }}"
                                                      alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                     class="img-fluid rounded-circle mb-3"
+                                                     style="border: 4px solid #28862b; padding: 4px; object-fit: cover; width: 240px; height: 240px;">
                                             @else
-                                                <img src="{{ asset('assets/img/guru_female.jpg') }}"
-                                                     alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @if($guru->gender->jenis == 'Laki laki')
+                                                    <img src="{{ asset('assets/img/guru_male.jpg') }}"
+                                                        alt="Profile Image"
+                                                        class="w-75 img-fluid rounded-circle mb-3"
+                                                        style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @else
+                                                    <img src="{{ asset('assets/img/guru_female.jpg') }}"
+                                                        alt="Profile Image"
+                                                        class="w-75 img-fluid rounded-circle mb-3"
+                                                        style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @endif
                                             @endif
                                         </div>
                                         <h4>{{ $guru->nama }}</h4>
@@ -42,8 +47,7 @@
                                         </div>
                                         <hr class="flex-grow-3 border-white opacity-5 mt-n2 mb-3">
                                         <div class="mt-auto">
-                                            <!-- Tombol Edit Guru -->
-                                            <a href="{{ route('guru.edit', $guru->id) }}" class="btn bg-gradient-warning mb-2 w-100">Edit Guru</a>
+                                            <a href="{{ route('guru.profileedit', $guru->id) }}" class="btn bg-gradient-warning mb-2 w-100">Edit Profile</a>
                                         </div>
                                     </div>
                                 </div>

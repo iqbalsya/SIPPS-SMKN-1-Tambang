@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->string('alamat', 255)->nullable();
             $table->string('telepon', 255)->nullable();
+            $table->string('foto', 255)->nullable(); 
             $table->timestamps();
 
             $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade')->onUpdate('cascade');

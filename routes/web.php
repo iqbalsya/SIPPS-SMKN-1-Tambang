@@ -61,7 +61,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
+    Route::get('/siswa/profile/edit', [SiswaController::class, 'profileEdit'])->name('siswa.profileedit');
+    Route::put('/siswa/edit', [SiswaController::class, 'profileUpdate'])->name('siswa.profileupdate');
+
     Route::get('/guru/profile', [GuruController::class, 'profile'])->name('guru.profile');
+    Route::get('/guru/profile/edit', [GuruController::class, 'profileEdit'])->name('guru.profileedit');
+    Route::put('/guru/edit', [GuruController::class, 'profileUpdate'])->name('guru.profileupdate');
 });
 
 // Route untuk Siswa dengan permission mengelola siswa dan mengakses halaman siswa
@@ -185,8 +190,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lapor-pelanggaran/create', [LaporPelanggaranController::class, 'create'])->name('lapor-pelanggaran.create');
     Route::post('/lapor-pelanggaran', [LaporPelanggaranController::class, 'store'])->name('lapor-pelanggaran.store');
     Route::get('/lapor-pelanggaran/{id}', [LaporPelanggaranController::class, 'show'])->name('lapor-pelanggaran.show');
-    Route::get('/lapor-pelanggaran/{id}/edit', [LaporPelanggaranController::class, 'edit'])->name('lapor-pelanggaran.edit');
-    Route::delete('/lapor-pelanggaran/{id}', [LaporPelanggaranController::class, 'destroy'])->name('lapor-pelanggaran.destroy');
+    Route::get('lapor-pelanggaran/{id}/edit', [LaporPelanggaranController::class, 'edit'])->name('lapor-pelanggaran.edit');
+    Route::put('lapor-pelanggaran/{id}', [LaporPelanggaranController::class, 'update'])->name('lapor-pelanggaran.update');
+    Route::delete('lapor-pelanggaran/{id}', [LaporPelanggaranController::class, 'destroy'])->name('lapor-pelanggaran.destroy');
+    
 });
 
 

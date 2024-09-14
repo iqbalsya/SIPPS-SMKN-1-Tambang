@@ -79,7 +79,8 @@ class RolePermissionSeeder extends Seeder
             'mengelola pelanggaran',
             'mengelola sanksi pelanggaran',
             'mengelola buku pelanggaran',
-            'melaporkan keterlambatan'
+            'melaporkan keterlambatan',
+            'mengedit profile guru',
         ]);
 
         $kesiswaan->givePermissionTo([
@@ -97,7 +98,8 @@ class RolePermissionSeeder extends Seeder
             'mengakses halaman lapor keterlambatan',
             'melaporkan pelanggaran',
             'mengelola buku pelanggaran',
-            'melaporkan keterlambatan'
+            'melaporkan keterlambatan',
+            'mengedit profile guru',
         ]);
 
         $waliKelas->givePermissionTo([
@@ -116,7 +118,7 @@ class RolePermissionSeeder extends Seeder
             'melaporkan pelanggaran',
             'memvalidasi pelanggaran',
             'mengelola buku pelanggaran kelas',
-            'mengelola guru',
+            'mengedit profile guru',
             'melaporkan keterlambatan'
         ]);
 
@@ -130,14 +132,16 @@ class RolePermissionSeeder extends Seeder
             'mengakses halaman pelanggaran',
             'mengakses halaman sanksi pelanggaran',
             'mengakses halaman lapor pelanggaran',
+            'mengakses halaman buku pelanggaran',
             'mengakses halaman lapor keterlambatan',
             'melaporkan keterlambatan',
             'melaporkan pelanggaran',
-            'mengelola guru',
+            'mengedit profile guru',
         ]);
 
         $siswa->givePermissionTo([
             'mengakses halaman profile siswa',
+            'mengedit profile siswa',
             'mengakses halaman tipe pelanggaran',
             'mengakses halaman pelanggaran',
             'mengakses halaman sanksi pelanggaran',
@@ -165,9 +169,6 @@ class RolePermissionSeeder extends Seeder
         $admin->assignRole('wali-kelas');
 
         $admin = User::where('email', 'ilkofazendra@gmail.com')->first();
-        $admin->assignRole('wali-kelas');
-
-        $admin = User::where('email', 'merifajriati@gmail.com')->first();
         $admin->assignRole('wali-kelas');
 
         $admin = User::where('email', 'syahril@gmail.com')->first();

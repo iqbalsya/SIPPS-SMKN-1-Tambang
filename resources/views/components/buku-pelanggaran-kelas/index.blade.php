@@ -61,7 +61,7 @@
                                         <th class="text-center" width="300px">Pelanggaran</th>
                                         <th class="text-center" width="10px">Poin</th>
                                         <th class="text-center" width="50px">Hari, Tanggal</th>
-                                        @haspermission('mengelola buku pelanggaran')
+                                        @haspermission('mengelola buku pelanggaran kelas')
                                             <th class="text-center" width="80px">Aksi</th>
                                         @endhaspermission
                                     </tr>
@@ -76,7 +76,7 @@
                                         <td class="ps-2">{{ $bukuPelanggaran->hari }}, {{ $bukuPelanggaran->formatted_tanggal }}</td>
                                         
                                         <!-- Aksi -->
-                                        @haspermission('mengelola buku pelanggaran')
+                                        @haspermission('mengelola buku pelanggaran kelas')
                                             <td class="text-center">
                                                 <a href="{{ route('buku-pelanggaran-kelas.show', $bukuPelanggaran->id) }}" class="edit btn btn-info btn-link btn-md m-0 p-2">
                                                     <i class="material-icons">visibility</i>

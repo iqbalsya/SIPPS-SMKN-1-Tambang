@@ -19,17 +19,24 @@
                                 <div class="col-md-4">
                                     <div class="card text-center border-success shadow-lg p-3 bg-body rounded h-100 d-flex flex-column">
                                         <div class="px-3 pt-3">
-                                            <!-- Ganti gambar sesuai dengan jenis kelamin -->
-                                            @if($guru->gender->jenis == 'Laki laki')
-                                                <img src="{{ asset('assets/img/guru_male.jpg') }}"
+
+                                            @if ($guru->foto)
+                                                <img src="{{ asset('storage/' . $guru->foto) }}"
                                                      alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                     class="img-fluid rounded-circle mb-3"
+                                                     style="border: 4px solid #28862b; padding: 4px; object-fit: cover; width: 240px; height: 240px;">
                                             @else
-                                                <img src="{{ asset('assets/img/guru_female.jpg') }}"
-                                                     alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @if($guru->gender->jenis == 'Laki laki')
+                                                    <img src="{{ asset('assets/img/guru_male.jpg') }}"
+                                                        alt="Profile Image"
+                                                        class="w-75 img-fluid rounded-circle mb-3"
+                                                        style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @else
+                                                    <img src="{{ asset('assets/img/guru_female.jpg') }}"
+                                                        alt="Profile Image"
+                                                        class="w-75 img-fluid rounded-circle mb-3"
+                                                        style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @endif
                                             @endif
                                         </div>
                                         <h4>{{ $guru->nama }}</h4>

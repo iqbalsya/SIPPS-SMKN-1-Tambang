@@ -113,6 +113,10 @@
 
                     setTimeout(() => { $('.alert').fadeOut('slow', () => $(this).remove()); }, 5000);
                 });
+
+                function confirmDelete() {
+                    return confirm('Apakah Anda yakin ingin menghapus pelanggaran ini?');
+                }
             </script>
 
             <style>

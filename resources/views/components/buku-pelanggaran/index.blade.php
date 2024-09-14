@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
 
-                                @haspermission('mengelola buku pelanggaran')
+                                @haspermission('mencatat pelanggaran')
                                     <div>
                                         <a class="btn bg-gradient-success mb-0" href="{{ route('buku-pelanggaran.create') }}">
                                             <i class="material-icons text-xl">add</i>&nbsp;Catat Pelanggaran

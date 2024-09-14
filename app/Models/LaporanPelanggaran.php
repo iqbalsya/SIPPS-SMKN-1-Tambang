@@ -19,6 +19,7 @@ class LaporanPelanggaran extends Model
         'pelanggaran_id',
         'guru_id',
         'hari_tanggal',
+        'poin',
         'alasan',
     ];
 

@@ -14,12 +14,10 @@ class BukuPelanggaranController extends Controller
 {
     public function index()
     {
-        // Ambil semua data pelanggaran dengan relasi yang diperlukan
         $bukuPelanggarans = BukuPelanggaran::with(['siswa', 'tipePelanggaran', 'pelanggaran', 'guru', 'kelas'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Ambil daftar semua kelas untuk ditampilkan di halaman (jika diperlukan)
         $kelasList = Kelas::all();
 
         return view('components.buku-pelanggaran.index', compact('bukuPelanggarans', 'kelasList'));
@@ -34,21 +32,19 @@ class BukuPelanggaranController extends Controller
 
     public function create(Request $request, $siswa_id = null)
     {
-        $siswa = null;
+        // $siswa = null;
      
-        // Assuming `Guru` is related to `User` model
-        $guru = Auth::user()->guru;  // Get the currently logged-in teacher (Guru)
+        // $guru = Auth::user()->guru; 
      
-        // Check if the teacher has a class (handle hasOne or hasMany relationships)
-        if ($guru && $guru->kelas->isNotEmpty()) {
-            $kelas = $guru->kelas->first();  // If the teacher has multiple classes, get the first one
-        } else {
-            $kelas = null;  // Handle if the teacher has no class
-        }
+        // if ($guru && $guru->kelas->isNotEmpty()) {
+        //     $kelas = $guru->kelas->first();  /
+        // } else {
+        //     $kelas = null;  
+        // }
     
-        if ($siswa_id) {
-            $siswa = Siswa::with('kelas')->findOrFail($siswa_id);
-        }
+        // if ($siswa_id) {
+        //     $siswa = Siswa::with('kelas')->findOrFail($siswa_id);
+        // }
     
         $tipePelanggaran = TipePelanggaran::all();
         $gurus = Guru::all();
@@ -61,20 +57,20 @@ class BukuPelanggaranController extends Controller
     
     public function store(Request $request)
     {
-        $user = Auth::user(); // Guru yang sedang login
-        if (!$user || !$user->guru) {
-            return redirect()->back()->withErrors('Anda tidak memiliki izin sebagai guru.');
-        }
+        // $user = Auth::user(); 
+        // if (!$user || !$user->guru) {
+        //     return redirect()->back()->withErrors('Anda tidak memiliki izin sebagai guru.');
+        // }
     
-        $guru = $user->guru;  // Guru login dari relasi
-        $kelas = Kelas::where('id', $request->input('kelas_id'))
-                      ->where('guru_id', $guru->id) // Pastikan guru adalah wali kelas
-                      ->first();
+        // $guru = $user->guru; 
+        // $kelas = Kelas::where('id', $request->input('kelas_id'))
+        //               ->where('guru_id', $guru->id) 
+        //               ->first();
     
-        // Jika tidak ada kelas yang valid atau bukan wali kelas
-        if (!$kelas) {
-            return redirect()->back()->withErrors('Anda tidak berhak mencatat pelanggaran untuk kelas ini.');
-        }
+        // // Jika tidak ada kelas yang valid atau bukan wali kelas
+        // if (!$kelas) {
+        //     return redirect()->back()->withErrors('Anda tidak berhak mencatat pelanggaran untuk kelas ini.');
+        // }
     
         $request->validate([
             'siswa_id' => 'required|exists:siswas,id',
@@ -86,11 +82,9 @@ class BukuPelanggaranController extends Controller
             'alasan' => 'nullable|string|max:255',
         ]);
     
-        // Cek pelanggaran
         $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
         $poin = $pelanggaran->poin;
     
-        // Simpan data pelanggaran
         BukuPelanggaran::create([
             'siswa_id' => $request->siswa_id,
             'kelas_id' => $request->kelas_id,

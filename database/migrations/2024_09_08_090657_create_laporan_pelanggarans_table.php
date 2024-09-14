@@ -23,6 +23,7 @@ class CreateLaporanPelanggaransTable extends Migration
             $table->foreignId('pelanggaran_id')->constrained('pelanggarans');
             $table->foreignId('guru_id')->constrained('gurus');
             $table->date('hari_tanggal');
+            $table->integer('poin');
             $table->string('alasan')->nullable();
             $table->timestamps();
         });

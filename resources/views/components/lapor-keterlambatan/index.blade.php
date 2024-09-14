@@ -21,13 +21,13 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-3 pb-3">
                                 <h4 class="text-white text-capitalize ps-3">Data Keterlambatan Siswa</h4>
-                                <p class="text-white ps-3 fw-normal mt-n2 mb-1">Lapor keterlambatan dan cetak surat izin masuk kelas</p>
+                                <p class="text-white ps-3 fw-normal mt-n2 mb-1">Catat keterlambatan siswa dan cetak surat izin masuk kelas</p>
                             </div>
                         </div>
                         <div class="container pt-2 mb-3">
                             <div class="my-3 text-end">
                                 <a class="btn bg-gradient-success mb-0" href="{{ route('lapor-keterlambatan.create') }}">
-                                    <i class="material-icons text-xl">add</i>&nbsp;Lapor Keterlambatan
+                                    <i class="material-icons text-xl">add</i>&nbsp;Catat Keterlambatan
                                 </a>
                             </div>
                             <table class="table table-striped table-bordered data-table mb-3">

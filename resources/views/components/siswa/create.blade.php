@@ -14,11 +14,20 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('siswa.store') }}" method="POST">
+                            <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">
                                     <div class="col-md-6">
+
+                                        <div class="form-group mb-3">
+                                            <label for="foto">Upload Foto</label>
+                                            <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto">
+                                            @error('foto')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        
                                         <div class="form-group mb-3">
                                             <label for="nama">Nama Lengkap&nbsp;<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
@@ -34,7 +43,6 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-
 
                                         <div class="form-group mb-3">
                                             <label for="jurusan_id">Jurusan&nbsp;<span class="text-danger">*</span></label>
@@ -126,6 +134,20 @@
                                         </div>
 
                                         <div class="form-group mb-3">
+                                            <label for="status_parental">Status Parental</label>
+                                            <select class="form-select @error('status_parental') is-invalid @enderror" id="status_parental" name="status_parental">
+                                                <option value="" selected disabled>Pilih</option>
+                                                <option value="lengkap" {{ old('status_parental') == 'lengkap' ? 'selected' : '' }}>Lengkap</option>
+                                                <option value="yatim" {{ old('status_parental') == 'yatim' ? 'selected' : '' }}>Yatim</option>
+                                                <option value="piatu" {{ old('status_parental') == 'piatu' ? 'selected' : '' }}>Piatu</option>
+                                                <option value="yatim piatu" {{ old('status_parental') == 'yatim piatu' ? 'selected' : '' }}>Yatim Piatu</option>
+                                            </select>
+                                            @error('status_parental')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mb-3">
                                             <label for="nama_ayah">Nama Ayah</label>
                                             <input type="text" class="form-control" id="nama_ayah" name="nama_ayah" value="{{ old('nama_ayah') }}">
                                         </div>
@@ -139,8 +161,8 @@
                                             <label for="alamat_orang_tua">Alamat Orang Tua</label>
                                             <textarea class="form-control" id="alamat_orang_tua" name="alamat_orang_tua">{{ old('alamat_orang_tua') }}</textarea>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
 
                                 <div class="d-flex justify-content-end">

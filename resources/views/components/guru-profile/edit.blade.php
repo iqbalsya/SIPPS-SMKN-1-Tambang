@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('guru.update', $guru->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('guru.profileupdate', $guru->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -37,6 +37,13 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
+                                            <label for="tugas_tambahan">Tugas Tambahan</label>
+                                            <input type="text" class="form-control" id="tugas_tambahan" name="tugas_tambahan" value="{{ old('tugas_tambahan', $guru->tugas_tambahan) }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
                                             <label for="nama">Nama Lengkap&nbsp;<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', $guru->nama) }}">
                                             @error('nama')
@@ -45,6 +52,7 @@
                                         </div>
                                     </div>
 
+
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label for="tempat_lahir">Tempat Lahir</label>
@@ -52,58 +60,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="nip_nuptk">NIP/NUPTK&nbsp;<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('nip_nuptk') is-invalid @enderror" id="nip_nuptk" name="nip_nuptk" value="{{ old('nip_nuptk', $guru->nip_nuptk) }}">
-                                            @error('nip_nuptk')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $guru->tanggal_lahir) }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="pangkat_gol_jabatan">Pangkat/Gol. Jabatan</label>
-                                            <input type="text" class="form-control" id="pangkat_gol_jabatan" name="pangkat_gol_jabatan" value="{{ old('pangkat_gol_jabatan', $guru->pangkat_gol_jabatan) }}">
-                                        </div>
-                                    </div>
-       
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="agama_id">Agama&nbsp;<span class="text-danger">*</span></label>
-                                            <select class="form-select @error('agama_id') is-invalid @enderror" id="agama_id" name="agama_id">
-                                                <option value="" selected disabled>Pilih Agama</option>
-                                                @foreach($agamas as $agama)
-                                                    <option value="{{ $agama->id }}" {{ old('agama_id', $guru->agama_id) == $agama->id ? 'selected' : '' }}>{{ $agama->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('agama_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="tugas_tambahan">Tugas Tambahan</label>
-                                            <input type="text" class="form-control" id="tugas_tambahan" name="tugas_tambahan" value="{{ old('tugas_tambahan', $guru->tugas_tambahan) }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="telepon">Telepon</label>
-                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon', $guru->telepon) }}">
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
@@ -122,14 +78,61 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
+                                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $guru->tanggal_lahir) }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="nip_nuptk">NIP/NUPTK&nbsp;<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('nip_nuptk') is-invalid @enderror" id="nip_nuptk" name="nip_nuptk" value="{{ old('nip_nuptk', $guru->nip_nuptk) }}">
+                                            @error('nip_nuptk')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="telepon">Telepon</label>
+                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ old('telepon', $guru->telepon) }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="pangkat_gol_jabatan">Pangkat/Gol. Jabatan</label>
+                                            <input type="text" class="form-control" id="pangkat_gol_jabatan" name="pangkat_gol_jabatan" value="{{ old('pangkat_gol_jabatan', $guru->pangkat_gol_jabatan) }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
                                             <label for="alamat">Alamat</label>
                                             <textarea class="form-control" id="alamat" name="alamat">{{ old('alamat', $guru->alamat) }}</textarea>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3 mt-n4">
+                                            <label for="agama_id">Agama&nbsp;<span class="text-danger">*</span></label>
+                                            <select class="form-select @error('agama_id') is-invalid @enderror" id="agama_id" name="agama_id">
+                                                <option value="" selected disabled>Pilih Agama</option>
+                                                @foreach($agamas as $agama)
+                                                    <option value="{{ $agama->id }}" {{ old('agama_id', $guru->agama_id) == $agama->id ? 'selected' : '' }}>{{ $agama->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('agama_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="{{ route('guru.index') }}" class="btn btn-secondary mb-0 mt-3 me-2">Batal</a>
+                                    <a href="{{ route('guru.profile') }}" class="btn btn-secondary mb-0 mt-3 me-2">Batal</a>
                                     <button type="submit" class="btn btn-success mb-0 mt-3">Simpan</button>
                                 </div>
                             </form>

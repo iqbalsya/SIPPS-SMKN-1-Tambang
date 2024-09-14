@@ -34,37 +34,13 @@
 
                                 <x-navbars.navs.pelanggaran activePage="sanksi-pelanggaran"></x-navbars.navs.pelanggaran>
 
-                                {{-- <div class="nav-wrapper position-relative my-4">
-                                    <ul class="nav nav-pills nav-fill" role="tablist">
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1" href="{{ route('pelanggaran.index') }}"
-                                                role="tab" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">home</i>
-                                                <span class="ms-1">List Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1" href="{{ route('tipe-pelanggaran.index') }}"
-                                                role="tab" aria-selected="false">
-                                                <i class="material-icons text-lg position-relative">email</i>
-                                                <span class="ms-1">Tipe Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item px-4">
-                                            <a class="nav-link mb-0 px-0 py-1 active" href="{{ route('sanksi-pelanggaran.index') }}"
-                                                role="tab" aria-selected="true">
-                                                <i class="material-icons text-lg position-relative">settings</i>
-                                                <span class="ms-1">Sanksi Pelanggaran</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> --}}
-
+                                @haspermission('mengelola sanksi pelanggaran')
                                 <div class="my-3 text-end">
                                     <a class="btn bg-gradient-danger mb-0" href="{{ route('sanksi-pelanggaran.create') }}">
                                         <i class="material-icons text-sm">add</i>&nbsp;Tambah Sanksi Pelanggaran
                                     </a>
                                 </div>
+                                @endhaspermission
                             </div>
 
                             <table class="table table-striped table-bordered data-table mb-3">

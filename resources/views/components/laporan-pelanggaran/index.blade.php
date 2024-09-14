@@ -31,9 +31,9 @@
                                     <tr>
                                         <th class="text-center" width="16px">No</th>
                                         <th class="text-center" width="120px">Siswa</th>
-                                        <th class="text-center" width="20px">Kelas</th>
                                         <th class="text-center" width="300px">Pelanggaran</th>
                                         <th class="text-center" width="50px">Hari, Tanggal</th>
+                                        <th class="text-center" width="50px">Poin</th>
                                         <th class="text-center" width="120px">Guru Pelapor</th>
                                         <th class="text-center" width="50px">Aksi</th>
                                     </tr>
@@ -45,13 +45,13 @@
 
                                         <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $laporanPelanggaran->siswa->nama }}</td>
 
-                                        <td class="ps-2" style="word-wrap: break-word; word-break: break-all; white-space: normal;">{{ $laporanPelanggaran->siswa->kelas->nama }}</td>
-
                                         <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $laporanPelanggaran->pelanggaran->deskripsi }}</td>
 
                                         <td class="ps-2">
                                             {{ $laporanPelanggaran->hari }}, {{ $laporanPelanggaran->formatted_tanggal }}
                                         </td>
+
+                                        <td class="text-center">{{ $laporanPelanggaran->poin }}</td>
 
                                         <td class="ps-2" style="word-wrap: break-word; white-space: normal;">{{ $laporanPelanggaran->guru->nama }}</td>
                                         

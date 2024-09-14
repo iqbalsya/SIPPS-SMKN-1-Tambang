@@ -14,10 +14,8 @@ class LaporPelanggaranController extends Controller
 {
     public function index()
     {
-        // Mendapatkan guru yang terkait dengan user yang sedang login
         $guru = auth()->user()->guru;
 
-        // Menampilkan laporan pelanggaran yang dilaporkan oleh guru yang sedang login
         $laporanPelanggarans = $guru->laporanPelanggaran()
                             ->with(['siswa', 'pelanggaran'])
                             ->orderBy('created_at', 'desc')
@@ -27,20 +25,16 @@ class LaporPelanggaranController extends Controller
     }
         
 
-    // Menampilkan form untuk membuat laporan pelanggaran
     public function create()
     {
-        // Mengambil data tipe pelanggaran dan kelas yang tersedia
-        $allKelas = Kelas::all(); // Ambil semua kelas
-        $tipePelanggaran = TipePelanggaran::all(); // Ambil semua tipe pelanggaran
+        $allKelas = Kelas::all(); 
+        $tipePelanggaran = TipePelanggaran::all();
 
-        // Tampilkan halaman create dengan data kelas dan tipe pelanggaran
         return view('components.lapor-pelanggaran.create', compact('allKelas', 'tipePelanggaran'));
     }
 
     public function store(Request $request)
     {
-        // Validasi input dari form
         $request->validate([
             'siswa_id' => 'required|exists:siswas,id',
             'kelas_id' => 'required|exists:kelas,id',
@@ -51,21 +45,75 @@ class LaporPelanggaranController extends Controller
             'alasan' => 'nullable|string|max:255',
         ]);
 
-        // Buat laporan pelanggaran dengan data yang valid
+        $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
+        $poin = $pelanggaran->poin;
+
         LaporanPelanggaran::create([
-            'siswa_id' => $request->siswa_id, // Ambil siswa yang dilaporkan
-            'kelas_id' => $request->kelas_id, // Ambil kelas yang relevan
-            'pelanggaran_id' => $request->pelanggaran_id, // Ambil jenis pelanggaran
+            'siswa_id' => $request->siswa_id,
+            'kelas_id' => $request->kelas_id, 
+            'pelanggaran_id' => $request->pelanggaran_id,
             'tipe_pelanggaran_id' => $request->tipe_pelanggaran_id,
-            'guru_id' => Auth::user()->guru->id, // Guru pelapor adalah guru yang sedang login
-            'hari_tanggal' => $request->hari_tanggal, // Tanggal pelanggaran
-            'alasan' => $request->alasan, // Alasan pelanggaran
+            'guru_id' => Auth::user()->guru->id, 
+            'hari_tanggal' => $request->hari_tanggal,
+            'poin' => $poin,
+            'alasan' => $request->alasan, 
         ]);
 
-        // Redirect ke halaman laporan pelanggaran dengan pesan sukses
+
         return redirect()->route('lapor-pelanggaran.index')->with('success', 'Laporan pelanggaran berhasil dibuat.');
     }
-    // Method untuk fetch siswa berdasarkan kelas
+
+
+    public function edit($id)
+    {
+        $laporanPelanggaran = LaporanPelanggaran::findOrFail($id);
+        $allKelas = Kelas::all();
+        $allSiswa = Siswa::where('kelas_id', $laporanPelanggaran->kelas_id)->get();
+        $tipePelanggaran = TipePelanggaran::all();
+        $allPelanggaran = Pelanggaran::where('tipe_pelanggaran_id', $laporanPelanggaran->tipe_pelanggaran_id)->get();
+
+        return view('components.lapor-pelanggaran.edit', compact('laporanPelanggaran', 'allKelas', 'allSiswa', 'tipePelanggaran', 'allPelanggaran'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'siswa_id' => 'required|exists:siswas,id',
+            'kelas_id' => 'required|exists:kelas,id',
+            'tipe_pelanggaran_id' => 'required|exists:tipe_pelanggarans,id',
+            'pelanggaran_id' => 'required|exists:pelanggarans,id',
+            'hari_tanggal' => 'required|date',
+            'alasan' => 'nullable|string|max:255',
+        ]);
+
+        $laporanPelanggaran = LaporanPelanggaran::findOrFail($id);
+        $pelanggaran = Pelanggaran::findOrFail($request->pelanggaran_id);
+        $poin = $pelanggaran->poin;
+
+        $laporanPelanggaran->update([
+            'siswa_id' => $request->siswa_id,
+            'kelas_id' => $request->kelas_id, 
+            'pelanggaran_id' => $request->pelanggaran_id,
+            'tipe_pelanggaran_id' => $request->tipe_pelanggaran_id,
+            'hari_tanggal' => $request->hari_tanggal,
+            'poin' => $poin,
+            'alasan' => $request->alasan,
+        ]);
+
+        return redirect()->route('lapor-pelanggaran.index')->with('success', 'Laporan pelanggaran berhasil diupdate.');
+    }
+    
+
+    public function destroy($id)
+    {
+        $laporanPelanggaran = LaporanPelanggaran::findOrFail($id);
+        $laporanPelanggaran->delete();
+
+        return redirect()->route('lapor-pelanggaran.index')->with('success', 'Laporan pelanggaran berhasil dihapus.');
+    }
+
+
+
     public function getSiswa($kelasId)
     {
         // Fetch siswa berdasarkan kelas yang dipilih
@@ -75,7 +123,7 @@ class LaporPelanggaranController extends Controller
         return response()->json($siswas);
     }
 
-    // Method untuk fetch pelanggaran berdasarkan tipe pelanggaran
+
     public function getPelanggaran($tipePelanggaranId)
     {
         // Fetch pelanggaran berdasarkan tipe pelanggaran yang dipilih

@@ -62,7 +62,7 @@
                                                         <td>{{ $pelanggaran->hari }}, {{ $pelanggaran->formatted_tanggal }}</td>
                                                     </tr>
                                                     <tr class="align-middle" height="50px">
-                                                        <th>Wali Kelas</th>
+                                                        <th>Guru Pelapor</th>
                                                         <td>{{ $pelanggaran->guru->nama }}</td>
                                                     </tr>
                                                     <tr class="align-middle" height="50px">

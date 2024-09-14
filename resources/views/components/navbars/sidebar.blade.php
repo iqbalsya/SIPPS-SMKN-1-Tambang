@@ -35,7 +35,7 @@ $user = auth()->user();
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'profile-siswa' ? 'active bg-gradient-success' : '' }}" href="{{ route('siswa.profile') }}">
                     <i class="material-icons opacity-10 pb-1 ms-n2" style="font-size: 1.8rem; margin-right: 10px;">account_circle</i>
-                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->name }}</span>
+                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->siswa->nama }}</span>
                 </a>
             </li>
             @endhaspermission
@@ -44,7 +44,7 @@ $user = auth()->user();
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center {{ $activePage == 'profile-guru' ? 'active bg-gradient-success' : '' }}" href="{{ route('guru.profile') }}">
                     <i class="material-icons opacity-10 pb-1 ms-n2" style="font-size: 1.8rem; margin-right: 10px;">account_circle</i>
-                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->name }}</span>
+                    <span class="nav-link-text" style="word-wrap: break-word; white-space: normal;">{{ $user->guru->nama }}</span>
                 </a>
             </li>
             @endhaspermission

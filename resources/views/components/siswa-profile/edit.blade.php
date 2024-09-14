@@ -10,11 +10,11 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
                             <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
-                                <h4 class="text-white text-capitalize ps-3">Edit Siswa</h4>
+                                <h4 class="text-white text-capitalize ps-3">Edit Profile</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('siswa.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('siswa.profileupdate', $siswa->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -171,7 +171,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="{{ route('siswa.index') }}" class="btn btn-secondary mb-0 mt-3 me-2">Batal</a>
+                                    <a href="{{ route('siswa.profile') }}" class="btn btn-secondary mb-0 mt-3 me-2">Batal</a>
                                     <button type="submit" class="btn btn-success mb-0 mt-3">Simpan Perubahan</button>
                                 </div>
                             </form>

@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('nama_ibu', 255)->nullable();
             $table->string('alamat_orang_tua', 255)->nullable();
             $table->string('telepon_orang_tua', 255)->nullable();
+            $table->enum('status_parental', ['lengkap', 'yatim', 'piatu', 'yatim piatu'])->nullable();
+            $table->string('foto', 255)->nullable(); 
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
@@ -36,7 +38,6 @@ return new class extends Migration
             $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('agama_id')->references('id')->on('agamas')->onDelete('cascade')->onUpdate('cascade');
         });
-
     }
 
     /**

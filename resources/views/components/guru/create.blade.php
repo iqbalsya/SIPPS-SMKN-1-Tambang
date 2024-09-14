@@ -14,10 +14,20 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('guru.store') }}" method="POST">
+                            <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="foto">Upload Foto</label>
+                                            <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto">
+                                            @error('foto')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label for="nama">Nama Lengkap&nbsp;<span class="text-danger">*</span></label>

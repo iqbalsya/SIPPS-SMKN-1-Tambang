@@ -17,18 +17,25 @@
                                 <div class="col-md-4">
                                     <div class="card text-center border-success shadow-lg p-3 bg-body rounded h-100 d-flex flex-column">
                                         <div class="px-3 pt-3">
-                                            @if($siswa->gender->jenis == 'Laki laki')
-                                                <img src="{{ asset('assets/img/boy.jpg') }}"
+                                            @if ($siswa->foto)
+                                                <img src="{{ asset('storage/' . $siswa->foto) }}"
                                                      alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                     class="img-fluid rounded-circle mb-3"
+                                                     style="border: 4px solid #28862b; padding: 4px; object-fit: cover; width: 240px; height: 240px;">
                                             @else
-                                                <img src="{{ asset('assets/img/girl.jpg') }}"
-                                                     alt="Profile Image"
-                                                     class="w-75 img-fluid rounded-circle mb-3"
-                                                     style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @if($siswa->gender->jenis == 'Laki laki')
+                                                    <img src="{{ asset('assets/img/boy.jpg') }}"
+                                                         alt="Profile Image"
+                                                         class="w-75 img-fluid rounded-circle mb-3"
+                                                         style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @else
+                                                    <img src="{{ asset('assets/img/girl.jpg') }}"
+                                                         alt="Profile Image"
+                                                         class="w-75 img-fluid rounded-circle mb-3"
+                                                         style="border: 5px solid #28862b; padding:5px; background-color: rgba(255, 255, 255, 0);">
+                                                @endif
                                             @endif
-                                        </div>
+                                        </div>     
                                         <h4>{{ $siswa->nama }}</h4>
                                         <p class="fs-6 fw-normal mt-n1">{{ $siswa->jurusan->nama }}</p>
                                         <p class="fs-6 fw-normal mt-n3">Kelas {{ $siswa->kelas->nama }}</p>
@@ -43,6 +50,9 @@
                                             <p class="badge bg-gradient-danger">{{ $totalPoin }}</p>
                                         </div>
                                         <hr class="flex-grow-3 border-white opacity-5 mt-n2 mb-3">
+                                        <div>
+                                            <a href="{{ route('siswa.profileedit', $siswa->id) }}" class="btn bg-gradient-warning mb-2 w-100">Edit Profile</a>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -91,6 +101,10 @@
                                                     <tr class="align-middle">
                                                         <th>Status Dalam Keluarga</th>
                                                         <td>{{ $siswa->status_dalam_keluarga }}</td>
+                                                    </tr>
+                                                    <tr class="align-middle">
+                                                        <th>Status Parental</th>
+                                                        <td>{{ $siswa->status_parental }}</td>
                                                     </tr>
                                                     <tr class="align-middle">
                                                         <th>Anak Ke</th>

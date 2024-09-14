@@ -13,29 +13,22 @@ class LaporanPelanggaranController extends Controller
 {
     public function index()
     {
-        // Ambil data user yang login
         $user = Auth::user();
         
-        // Ambil data guru yang terhubung dengan user yang login
         $guru = $user->guru;
     
-        // Ambil semua ID kelas yang terkait dengan guru (jika guru mengajar lebih dari satu kelas)
         $kelasIds = $guru->kelas->pluck('id'); // Ini akan mengembalikan collection berisi ID kelas
-        
-        // Cek apakah guru memiliki kelas
+    
         if (!$guru || $kelasIds->isEmpty()) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses halaman ini.');
         }
     
-        // Ambil laporan pelanggaran untuk semua kelas yang diampu oleh guru
         $laporanPelanggarans = LaporanPelanggaran::whereIn('kelas_id', $kelasIds)
         ->orderBy('created_at', 'desc')
         ->get();
         
-        // Ambil informasi kelas yang terkait dengan guru
         $kelasList = Kelas::whereIn('id', $kelasIds)->get();
-    
-        // Kembalikan view dengan data laporan pelanggaran dan kelas yang terkait
+
         return view('components.laporan-pelanggaran.index', compact('laporanPelanggarans', 'kelasList'));
     }
 
@@ -45,10 +38,8 @@ class LaporanPelanggaranController extends Controller
         $user = Auth::user();
         $guru = $user->guru;
 
-        // Ambil kelas pertama dari koleksi kelas guru
         $kelas = $guru->kelas->first();
 
-        // Cek apakah kelas ada dan kelas_id dari laporan sama dengan id kelas guru
         if ($kelas && $laporanPelanggaran->kelas_id == $kelas->id) {
             BukuPelanggaran::create([
                 'siswa_id' => $laporanPelanggaran->siswa_id,
@@ -76,7 +67,6 @@ class LaporanPelanggaranController extends Controller
         $user = Auth::user();
         $guru = $user->guru;
 
-        // Cek apakah guru memiliki hak untuk menolak laporan dari salah satu kelas yang ia ampu
         if ($guru->kelas->contains('id', $laporanPelanggaran->kelas_id)) {
             $laporanPelanggaran->delete();
             return redirect()->route('laporan-pelanggaran.index')->with('success', 'Laporan pelanggaran berhasil ditolak.');
